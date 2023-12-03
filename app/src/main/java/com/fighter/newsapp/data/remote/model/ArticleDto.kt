@@ -2,8 +2,8 @@ package com.fighter.newsapp.data.remote.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Article(
-    @SerializedName("source") val source: Source,
+data class ArticleDto(
+    @SerializedName("source") val sourceDto: SourceDto,
     @SerializedName("author") val author: String,
     @SerializedName("title") val title: String,
     @SerializedName("description") val description: String,
@@ -12,7 +12,7 @@ data class Article(
     @SerializedName("publishedAt") val publishedAt: String,
     @SerializedName("content") val content: String,
 ) {
-    data class Source(
+    data class SourceDto(
         @SerializedName("id") val id: String,
         @SerializedName("name") val name: String,
     )
