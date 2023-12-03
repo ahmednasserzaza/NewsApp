@@ -1,7 +1,11 @@
 package com.fighter.newsapp.ui.newsDetails
 
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import com.fighter.newsapp.R
+import com.fighter.newsapp.databinding.FragmentNewsDetailsBinding
+import com.fighter.newsapp.ui.base.BaseFragment
 
-class NewsDetailsFragment : Fragment() {
-
+class NewsDetailsFragment : BaseFragment<FragmentNewsDetailsBinding>() {
+    override val layoutIdFragment: Int = R.layout.fragment_news_details
+    override val viewModel: NewsDetailsViewModel by viewModels()
 }
