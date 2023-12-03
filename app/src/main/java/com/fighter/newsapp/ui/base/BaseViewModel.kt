@@ -12,13 +12,13 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-abstract class BaseViewModel<S, E>(initialState: S) : ViewModel() {
+abstract class BaseViewModel<S, I>(initialState: S) : ViewModel() {
 
     private val _state = MutableStateFlow(initialState)
     val state = _state.asStateFlow()
 
-    private val _effect = MutableSharedFlow<E>()
-    val effect = _effect.asSharedFlow()
+    private val _intent = MutableSharedFlow<I>()
+    val intent = _intent.asSharedFlow()
 
     protected fun <T> tryToExecute(
         function: suspend () -> T,
@@ -49,9 +49,9 @@ abstract class BaseViewModel<S, E>(initialState: S) : ViewModel() {
         _state.update(updater)
     }
 
-    protected fun sendNewEffect(newEffect: E) {
+    protected fun sendNewEffect(newEffect: I) {
         viewModelScope.launch(Dispatchers.IO) {
-            _effect.emit(newEffect)
+            _intent.emit(newEffect)
         }
     }
 }

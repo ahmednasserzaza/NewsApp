@@ -1,4 +1,4 @@
-package com.fighter.newsapp.ui.main
+package com.fighter.newsapp.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
