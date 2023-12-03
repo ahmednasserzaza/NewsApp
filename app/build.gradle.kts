@@ -74,6 +74,7 @@ dependencies {
     val retrofitVersion = "2.9.0"
     val lottieVersion = "6.2.0"
     val paging = "3.2.1"
+    val localDateTime = "0.5.0"
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -100,19 +101,22 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
 
     // retrofit
-    implementation ("com.squareup.retrofit2:retrofit:$retrofitVersion")
-    implementation ("com.squareup.retrofit2:converter-gson:$retrofitVersion")
+    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
+    implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
 
     // viewModel
-    implementation ("androidx.fragment:fragment-ktx:1.6.2")
-    implementation ("androidx.activity:activity-ktx:1.8.1")
-    implementation ("androidx.lifecycle:lifecycle-extensions:2.2.0")
-    implementation ("androidx.navigation:navigation-fragment-ktx:2.7.5")
-    implementation ("androidx.navigation:navigation-ui-ktx:2.7.5")
+    implementation("androidx.fragment:fragment-ktx:1.6.2")
+    implementation("androidx.activity:activity-ktx:1.8.1")
+    implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
 
     // lottie
-    implementation ("com.airbnb.android:lottie:$lottieVersion")
+    implementation("com.airbnb.android:lottie:$lottieVersion")
 
     // paging
-    implementation ("androidx.paging:paging-runtime-ktx:$paging")
+    implementation("androidx.paging:paging-runtime-ktx:$paging")
+
+    // localDateTime
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:$localDateTime")
 }
