@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 abstract class BaseViewModel<S, E>(initialState: S) : ViewModel() {
@@ -41,6 +42,16 @@ abstract class BaseViewModel<S, E>(initialState: S) : ViewModel() {
                 if (exception is NewsAppException) handelApplicationExceptions(exception, onError)
                 else onError(ErrorState.InvalidData)
             }
+        }
+    }
+
+    protected fun updateState(updater: (S) -> S) {
+        _state.update(updater)
+    }
+
+    protected fun sendNewEffect(newEffect: E) {
+        viewModelScope.launch(Dispatchers.IO) {
+            _effect.emit(newEffect)
         }
     }
 }
