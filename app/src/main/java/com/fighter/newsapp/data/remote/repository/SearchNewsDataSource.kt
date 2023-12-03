@@ -4,9 +4,12 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.fighter.newsapp.data.remote.model.ArticleDto
 import com.fighter.newsapp.data.remote.service.NewsService
+import javax.inject.Inject
 import kotlin.properties.Delegates
 
-class SearchNewsDataSource(private val service: NewsService) : PagingSource<Int, ArticleDto>() {
+class SearchNewsDataSource @Inject constructor(
+    private val service: NewsService,
+) : PagingSource<Int, ArticleDto>() {
     override fun getRefreshKey(state: PagingState<Int, ArticleDto>): Int? {
         return state.anchorPosition
     }
