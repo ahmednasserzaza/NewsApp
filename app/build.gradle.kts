@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -5,6 +7,9 @@ plugins {
     id("com.google.dagger.hilt.android")
     kotlin("kapt")
 }
+
+val localProps = Properties()
+val localPropsFile = localProps.load(project.rootProject.file("local.properties").inputStream())
 
 android {
     namespace = "com.fighter.newsapp"
@@ -16,6 +21,8 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
+
+        buildConfigField("String", "API_KEY", localProps.getProperty("apiKey"))
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -51,6 +58,7 @@ android {
     buildFeatures {
         //noinspection DataBindingWithoutKapt
         dataBinding = true
+        buildConfig = true
     }
 }
 
