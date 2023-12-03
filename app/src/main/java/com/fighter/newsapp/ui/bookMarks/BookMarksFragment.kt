@@ -6,7 +6,6 @@ import com.fighter.newsapp.databinding.FragmentBookMarksBinding
 import com.fighter.newsapp.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class BookMarksFragment : BaseFragment<FragmentBookMarksBinding>() {
     override val layoutIdFragment: Int = R.layout.fragment_book_marks

@@ -1,4 +1,4 @@
-package com.fighter.newsapp.domain
+package com.fighter.newsapp.domain.utility
 
 open class NewsAppException : Exception()
 class InternalServerException : NewsAppException()

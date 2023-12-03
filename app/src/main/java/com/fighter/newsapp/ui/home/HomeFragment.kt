@@ -10,5 +10,4 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override val layoutIdFragment: Int = R.layout.fragment_home
     override val viewModel: HomeViewModel by viewModels()
-
 }

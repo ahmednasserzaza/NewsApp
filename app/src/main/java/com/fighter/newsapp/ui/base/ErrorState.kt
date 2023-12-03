@@ -1,12 +1,12 @@
 package com.fighter.newsapp.ui.base
 
-import com.fighter.newsapp.domain.BadRequestException
-import com.fighter.newsapp.domain.InternalServerException
-import com.fighter.newsapp.domain.NetworkException
-import com.fighter.newsapp.domain.NewsAppException
-import com.fighter.newsapp.domain.NotFoundException
-import com.fighter.newsapp.domain.TooManyRequestsException
-import com.fighter.newsapp.domain.UnAuthorizedException
+import com.fighter.newsapp.domain.utility.BadRequestException
+import com.fighter.newsapp.domain.utility.InternalServerException
+import com.fighter.newsapp.domain.utility.NetworkException
+import com.fighter.newsapp.domain.utility.NewsAppException
+import com.fighter.newsapp.domain.utility.NotFoundException
+import com.fighter.newsapp.domain.utility.TooManyRequestsException
+import com.fighter.newsapp.domain.utility.UnAuthorizedException
 
 sealed interface ErrorState {
     data object InternalServer : ErrorState
