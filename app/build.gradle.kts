@@ -62,9 +62,9 @@ dependencies {
     val roomVersion = "2.6.1"
     val coroutineVersion = "1.7.3"
     val coilVersion = "2.5.0"
-    val hiltVersion = "2.44"
+    val hiltVersion = "2.49"
     val retrofitVersion = "2.9.0"
-    val lottieVersion = "6.1.0"
+    val lottieVersion = "6.2.0"
     val paging = "3.2.1"
 
     implementation("androidx.core:core-ktx:1.12.0")
