@@ -1,6 +1,9 @@
 package com.fighter.newsapp.ui.mapper
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import com.fighter.newsapp.domain.entity.Article
+import com.fighter.newsapp.ui.utilities.formatDateString
 
 data class ArticleUiState(
     val title: String = "",
@@ -11,6 +14,7 @@ data class ArticleUiState(
     val content: String = "",
 )
 
+@RequiresApi(Build.VERSION_CODES.O)
 fun Article.toUiState(): ArticleUiState {
     return ArticleUiState(
         title = title,
@@ -18,6 +22,6 @@ fun Article.toUiState(): ArticleUiState {
         url = url,
         imageUrl = imageUrl,
         content = content,
-        publishedAt = publishedAt
+        publishedAt = publishedAt.formatDateString()
     )
 }
