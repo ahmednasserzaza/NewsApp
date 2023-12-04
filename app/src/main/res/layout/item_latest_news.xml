@@ -4,7 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="item"
+            type="com.fighter.newsapp.ui.mapper.ArticleUiState" />
 
+        <variable
+            name="listener"
+            type="com.fighter.newsapp.ui.home.adapter.NewsInteractionListener" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -24,6 +30,7 @@
                 android:layout_width="120dp"
                 android:layout_height="match_parent"
                 tools:src="@drawable/test"
+                app:loadImage="@{item.imageUrl}"
                 android:scaleType="centerCrop"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -35,6 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="24 Aug 1998"
+                android:text="@{item.publishedAt}"
                 app:layout_constraintStart_toEndOf="@+id/image_news"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_margin="8dp"
@@ -57,6 +65,7 @@
                 android:maxLines="3"
                 android:textSize="14sp"
                 android:layout_margin="8dp"
+                android:text="@{item.title}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/image_news"
