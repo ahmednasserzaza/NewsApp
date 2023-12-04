@@ -3,12 +3,12 @@ package com.fighter.newsapp.ui.mapper
 import com.fighter.newsapp.domain.entity.Article
 
 data class ArticleUiState(
-    val title: String,
-    val description: String,
-    val url: String,
-    val imageUrl: String,
-    val publishedAt: String,
-    val content: String,
+    val title: String = "",
+    val description: String = "",
+    val url: String = "",
+    val imageUrl: String = "",
+    val publishedAt: String = "",
+    val content: String = "",
 )
 
 fun Article.toUiState(): ArticleUiState {
