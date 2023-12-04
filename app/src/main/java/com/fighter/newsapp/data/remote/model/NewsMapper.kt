@@ -5,12 +5,12 @@ import com.fighter.newsapp.domain.utility.toDateTimeFormat
 
 fun ArticleDto.toEntity(): Article {
     return Article(
-        author = author,
-        title = title,
-        description = description,
-        url = url,
-        imageUrl = urlToImage,
-        content = content,
-        publishedAt = publishedAt
+        author = author ?: "",
+        title = title ?: "",
+        description = description ?: "",
+        url = url ?: "",
+        imageUrl = urlToImage ?: "",
+        content = content ?: "",
+        publishedAt = publishedAt ?: ""
     )
 }

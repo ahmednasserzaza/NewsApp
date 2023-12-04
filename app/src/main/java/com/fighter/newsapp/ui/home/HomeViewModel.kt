@@ -32,6 +32,7 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun onGetEgyptNewsSuccess(articles: List<Article>) {
+        println("Egypt news success = $articles")
         updateState { homeUiState ->
             homeUiState.copy(
                 isLoading = false,
@@ -59,6 +60,7 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun onError(errorState: ErrorState) {
+        println("Egypt news Error = $errorState")
         updateState { it.copy(isLoading = false, isError = true, error = errorState) }
     }
 

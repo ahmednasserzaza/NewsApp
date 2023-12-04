@@ -11,7 +11,7 @@ interface NewsService {
     suspend fun getEgyptNews(
         @Query("q") query: String = "Egypt",
         @Query("page") page: Int = 1,
-        @Query("pageSize") pageSize: Int = 10,
+        @Query("pageSize") pageSize: Int = 30,
         @Query("sortedBy") sortedBy: String = "popularity",
     ): Response<NewsResponse>
 

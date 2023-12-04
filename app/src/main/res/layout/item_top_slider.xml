@@ -23,12 +23,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
+            app:loadImage="@{item.imageUrl}"
             tools:src="@drawable/test" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#27000000" />
+            android:background="#61000000" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -41,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/md_theme_dark_onSurface"
                 android:textSize="12sp"
-                android:text="@{item.title}"
+                android:text="@{item.publishedAt}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="24 Oct 2023" />
@@ -52,7 +53,6 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:loadImage="@{item.imageUrl}"
                 app:tint="@color/md_theme_light_onPrimary"
                 tools:src="@drawable/icon_bookmark_outlined" />
 
@@ -60,8 +60,8 @@
                 android:id="@+id/title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
                 android:ellipsize="end"
                 android:maxLines="3"
                 android:text="@{item.title}"

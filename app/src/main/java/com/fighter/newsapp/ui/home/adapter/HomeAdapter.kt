@@ -38,18 +38,26 @@ class HomeAdapter(
 
     override fun bind(holder: ItemViewHolder, position: Int) {
         if (position != -1) {
-            val currentItem = homeItems[position]
-            if (currentItem is HomeItem.TopSlider) {
-                holder.binding.setVariable(
-                    BR.adapterRecycler,
-                    EgyptNewsAdapter(currentItem.egyptNews, listener as NewsInteractionListener)
-                )
-            }
-            if (currentItem is HomeItem.LatestNews) {
-                holder.binding.setVariable(
-                    BR.adapterRecycler,
-                    LatestNewsAdapter(currentItem.latestNews, listener as NewsInteractionListener)
-                )
+            when (val currentItem = homeItems[position]) {
+                is HomeItem.TopSlider -> {
+                    holder.binding.setVariable(
+                        BR.adapterRecycler,
+                        EgyptNewsAdapter(
+                            currentItem.egyptNews,
+                            listener as NewsInteractionListener
+                        )
+                    )
+                }
+
+                is HomeItem.LatestNews -> {
+                    holder.binding.setVariable(
+                        BR.adapterRecycler,
+                        LatestNewsAdapter(
+                            currentItem.latestNews,
+                            listener as NewsInteractionListener
+                        )
+                    )
+                }
             }
         }
     }
