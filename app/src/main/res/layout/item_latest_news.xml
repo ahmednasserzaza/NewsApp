@@ -18,7 +18,7 @@
         android:layout_height="100dp"
         app:strokeWidth="0dp"
         app:cardBackgroundColor="@color/md_theme_light_primaryContainer"
-        android:layout_margin="16dp"
+        android:layout_marginVertical="4dp"
         >
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
