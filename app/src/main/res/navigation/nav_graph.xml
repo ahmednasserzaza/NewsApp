@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/navigation">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/homeFragment">
 
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.fighter.newsapp.ui.home.HomeFragment"
+        tools:layout="@layout/fragment_home"
+        android:label="HomeFragment" />
+    <fragment
+        android:id="@+id/searchFragment"
+        tools:layout="@layout/fragment_search"
+        android:name="com.fighter.newsapp.ui.search.SearchFragment"
+        android:label="SearchFragment" />
+    <fragment
+        android:id="@+id/bookMarksFragment"
+        tools:layout="@layout/fragment_book_marks"
+        android:name="com.fighter.newsapp.ui.bookMarks.BookMarksFragment"
+        android:label="BookMarksFragment" />
+    <fragment
+        android:id="@+id/newsDetailsFragment"
+        tools:layout="@layout/fragment_news_details"
+        android:name="com.fighter.newsapp.ui.newsDetails.NewsDetailsFragment"
+        android:label="NewsDetailsFragment" />
 </navigation>
