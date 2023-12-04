@@ -9,20 +9,20 @@
         android:id="@+id/homeFragment"
         android:name="com.fighter.newsapp.ui.home.HomeFragment"
         tools:layout="@layout/fragment_home"
-        android:label="HomeFragment" />
+        android:label="NewsApp" />
     <fragment
         android:id="@+id/searchFragment"
         tools:layout="@layout/fragment_search"
         android:name="com.fighter.newsapp.ui.search.SearchFragment"
-        android:label="SearchFragment" />
+        android:label="Search" />
     <fragment
         android:id="@+id/bookMarksFragment"
         tools:layout="@layout/fragment_book_marks"
         android:name="com.fighter.newsapp.ui.bookMarks.BookMarksFragment"
-        android:label="BookMarksFragment" />
+        android:label="Bookmarks" />
     <fragment
         android:id="@+id/newsDetailsFragment"
         tools:layout="@layout/fragment_news_details"
         android:name="com.fighter.newsapp.ui.newsDetails.NewsDetailsFragment"
-        android:label="NewsDetailsFragment" />
+        android:label="News details" />
 </navigation>
