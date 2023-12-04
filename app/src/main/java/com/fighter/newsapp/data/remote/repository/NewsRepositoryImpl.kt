@@ -19,10 +19,9 @@ class NewsRepositoryImpl @Inject constructor(
 
     override suspend fun getEgyptNews(): List<ArticleDto>? {
         val result = service.getEgyptNews()
-        if (result.isSuccessful){
-            println("First Result success = ${result.body()?.articles}")
-            return result.body()?.articles
-        }else{
+        if (result.isSuccessful) {
+            return result.body()?.articles?.sortedByDescending { it.publishedAt }
+        } else {
             when (result.code()) {
                 400 -> throw NotFoundException()
                 401 -> throw UnAuthorizedException()
@@ -37,8 +36,7 @@ class NewsRepositoryImpl @Inject constructor(
     override suspend fun getLatestNews(): List<ArticleDto>? {
         val result = service.getLatestNews()
         if (result.isSuccessful) {
-            println("Second Result success = ${result.body()?.articles}")
-            return result.body()?.articles
+            return result.body()?.articles?.sortedByDescending { it.publishedAt }
         } else {
             when (result.code()) {
                 400 -> throw NotFoundException()
