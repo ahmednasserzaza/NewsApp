@@ -5,6 +5,8 @@ import com.fighter.newsapp.domain.usecase.GetEgyptNewsUseCase
 import com.fighter.newsapp.domain.usecase.GetLatestNewsUseCase
 import com.fighter.newsapp.ui.base.BaseViewModel
 import com.fighter.newsapp.ui.base.ErrorState
+import com.fighter.newsapp.ui.home.adapter.NewsInteractionListener
+import com.fighter.newsapp.ui.mapper.ArticleUiState
 import com.fighter.newsapp.ui.mapper.toUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -13,8 +15,12 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val getEgyptNews: GetEgyptNewsUseCase,
     private val getLatestNews: GetLatestNewsUseCase,
-) : BaseViewModel<HomeUiState, HomeIntent>(HomeUiState()) {
+) : BaseViewModel<HomeUiState, HomeIntent>(HomeUiState()), NewsInteractionListener {
 
+    init {
+        getTrendingEgyptNews()
+        getLatestBbcNews()
+    }
 
     private fun getTrendingEgyptNews() {
         updateState { it.copy(isLoading = true) }
@@ -29,9 +35,7 @@ class HomeViewModel @Inject constructor(
         updateState { homeUiState ->
             homeUiState.copy(
                 isLoading = false,
-                egyptNews = articles.map { article ->
-                    article.toUiState()
-                }
+                egyptNews = HomeItem.TopSlider(articles.map { it.toUiState() })
             )
         }
     }
@@ -49,15 +53,21 @@ class HomeViewModel @Inject constructor(
         updateState { homeUiState ->
             homeUiState.copy(
                 isLoading = false,
-                latestNews = articles.map { article ->
-                    article.toUiState()
-                }
+                latestNews = HomeItem.LatestNews(articles.map { it.toUiState() })
             )
         }
     }
 
     private fun onError(errorState: ErrorState) {
         updateState { it.copy(isLoading = false, isError = true, error = errorState) }
+    }
+
+    override fun onClickNewsItem(newsTitle: String) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onClickBookMark(item: ArticleUiState) {
+        TODO("Not yet implemented")
     }
 
 }

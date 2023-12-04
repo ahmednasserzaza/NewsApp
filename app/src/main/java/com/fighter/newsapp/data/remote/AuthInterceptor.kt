@@ -3,8 +3,9 @@ package com.fighter.newsapp.data.remote
 import com.fighter.newsapp.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Response
+import javax.inject.Inject
 
-class AuthInterceptor : Interceptor {
+class AuthInterceptor @Inject constructor() : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain
             .request()
@@ -16,6 +17,6 @@ class AuthInterceptor : Interceptor {
     }
 
     companion object {
-        private const val AUTHORIZATION = "authorizationKey"
+        private const val AUTHORIZATION = "Authorization"
     }
 }

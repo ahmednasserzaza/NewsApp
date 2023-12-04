@@ -4,6 +4,9 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import com.fighter.newsapp.data.remote.model.ArticleDto
 import com.fighter.newsapp.data.remote.service.NewsService
+import com.fighter.newsapp.domain.utility.InternalServerException
+import com.fighter.newsapp.domain.utility.NotFoundException
+import com.fighter.newsapp.domain.utility.UnAuthorizedException
 import javax.inject.Inject
 
 class NewsRepositoryImpl @Inject constructor(
@@ -15,11 +18,37 @@ class NewsRepositoryImpl @Inject constructor(
         PagingConfig(pageSize = 10, prefetchDistance = 5, enablePlaceholders = false)
 
     override suspend fun getEgyptNews(): List<ArticleDto>? {
-        return service.getEgyptNews().body()?.articles
+        val result = service.getEgyptNews()
+        if (result.isSuccessful){
+            println("First Result success = ${result.body()?.articles}")
+            return result.body()?.articles
+        }else{
+            when (result.code()) {
+                400 -> throw NotFoundException()
+                401 -> throw UnAuthorizedException()
+                500 -> throw InternalServerException()
+                else -> {
+                    throw Exception()
+                }
+            }
+        }
     }
 
     override suspend fun getLatestNews(): List<ArticleDto>? {
-        return service.getLatestNews().body()?.articles
+        val result = service.getLatestNews()
+        if (result.isSuccessful) {
+            println("Second Result success = ${result.body()?.articles}")
+            return result.body()?.articles
+        } else {
+            when (result.code()) {
+                400 -> throw NotFoundException()
+                401 -> throw UnAuthorizedException()
+                500 -> throw InternalServerException()
+                else -> {
+                    throw Exception()
+                }
+            }
+        }
     }
 
     override suspend fun searchForNews(query: String): Pager<Int, ArticleDto> {

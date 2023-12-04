@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         app:strokeWidth="0dp"
-        app:cardBackgroundColor="@color/md_theme_light_primaryContainer"
+        app:cardBackgroundColor="@color/md_theme_dark_surfaceVariant"
         android:layout_marginVertical="4dp"
         >
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -43,6 +43,7 @@
                 android:layout_height="wrap_content"
                 tools:text="24 Aug 1998"
                 android:text="@{item.publishedAt}"
+                android:textColor="@color/md_theme_light_onPrimary"
                 app:layout_constraintStart_toEndOf="@+id/image_news"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_margin="8dp"
@@ -52,6 +53,7 @@
                 android:id="@+id/icon_bookmark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:tint="@color/md_theme_light_onPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_margin="8dp"
@@ -66,6 +68,7 @@
                 android:textSize="14sp"
                 android:layout_margin="8dp"
                 android:text="@{item.title}"
+                android:textColor="@color/md_theme_light_onPrimary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/image_news"
