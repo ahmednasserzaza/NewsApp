@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
+import com.fighter.newsapp.BR
 
 abstract class BaseFragment<VDB : ViewDataBinding> : Fragment() {
     abstract val layoutIdFragment: Int
@@ -19,7 +20,7 @@ abstract class BaseFragment<VDB : ViewDataBinding> : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         _binding = DataBindingUtil.inflate(inflater, layoutIdFragment, container, false)
         _binding.apply {
@@ -34,6 +35,7 @@ abstract class BaseFragment<VDB : ViewDataBinding> : Fragment() {
         if (isRemoving)
             _binding.unbind()
     }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding.unbind()

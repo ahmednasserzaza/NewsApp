@@ -7,6 +7,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.fighter.newsapp.BR
 
 abstract class BasePagingAdapter<T : Any>(
     diffCallback: DiffUtil.ItemCallback<T>,

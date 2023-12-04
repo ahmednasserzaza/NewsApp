@@ -62,10 +62,6 @@ android {
     }
 }
 
-kapt {
-    correctErrorTypes = true
-}
-
 dependencies {
     val roomVersion = "2.6.1"
     val coroutineVersion = "1.7.3"
@@ -98,7 +94,7 @@ dependencies {
 
     // hilt
     implementation("com.google.dagger:hilt-android:$hiltVersion")
-    kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
+    ksp("com.google.dagger:hilt-compiler:$hiltVersion")
 
     // retrofit
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")

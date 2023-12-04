@@ -33,7 +33,6 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="160dp"
-            app:loadImage="@{item.imageUrl}"
             android:padding="16dp">
 
             <TextView
@@ -53,6 +52,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:loadImage="@{item.imageUrl}"
                 app:tint="@color/md_theme_light_onPrimary"
                 tools:src="@drawable/icon_bookmark_outlined" />
 
