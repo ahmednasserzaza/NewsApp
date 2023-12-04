@@ -5,6 +5,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
+    id("androidx.navigation.safeargs")
     kotlin("kapt")
 }
 
@@ -71,6 +72,7 @@ dependencies {
     val lottieVersion = "6.2.0"
     val paging = "3.2.1"
     val localDateTime = "0.5.0"
+    val navVersion = "2.7.5"
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -115,4 +117,8 @@ dependencies {
 
     // localDateTime
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:$localDateTime")
+
+    // navigation
+    implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
+    implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
 }
