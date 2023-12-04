@@ -9,7 +9,7 @@ fun ArticleDto.toEntity(): Article {
         title = title,
         description = description,
         url = url,
-        urlToImage = urlToImage,
+        imageUrl = urlToImage,
         content = content,
         publishedAt = publishedAt.toDateTimeFormat()
     )
