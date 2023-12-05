@@ -39,5 +39,4 @@ abstract class BasePagingAdapter<T : Any>(
 
     abstract class BaseViewHolder(binding: ViewDataBinding) :
         RecyclerView.ViewHolder(binding.root)
-
 }

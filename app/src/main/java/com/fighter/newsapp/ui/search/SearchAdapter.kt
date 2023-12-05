@@ -22,6 +22,5 @@ class SearchAdapter(
         ): Boolean {
             return oldItem == newItem
         }
-
     }
 }

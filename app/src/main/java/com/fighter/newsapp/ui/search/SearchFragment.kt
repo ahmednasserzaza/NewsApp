@@ -2,11 +2,11 @@ package com.fighter.newsapp.ui.search
 
 import android.os.Build
 import android.os.Bundle
-import android.transition.ChangeTransform
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.PagingData
 import com.fighter.newsapp.R
 import com.fighter.newsapp.databinding.FragmentSearchBinding
 import com.fighter.newsapp.ui.base.BaseFragment
@@ -29,7 +29,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     private val oldValue = MutableStateFlow(SearchUiState())
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        sharedElementEnterTransition = ChangeTransform()
         super.onViewCreated(view, savedInstanceState)
         bindNews()
         getSearchResultsBySearchTerm()
@@ -39,11 +38,14 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     private fun getSearchResultsBySearchTerm() {
         lifecycleScope.launch {
             viewModel.state.debounce(1000).collectLatest { searchUiState ->
-                if (searchUiState.searchQuery.isNotEmpty()
-                    && oldValue.value.searchQuery != viewModel.state.value.searchQuery
+                if (searchUiState.searchQuery.trim().isNotEmpty()
+                    && (oldValue.value.searchQuery != viewModel.state.value.searchQuery)
                 ) {
-                    bindNews()
                     oldValue.emit(viewModel.state.value)
+                    bindNews()
+                } else if (searchUiState.searchQuery.trim().isEmpty()) {
+                    oldValue.emit(SearchUiState())
+                    searchAdapter.submitData(PagingData.empty())
                 }
             }
         }
@@ -57,12 +59,11 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
             flow = searchAdapter.loadStateFlow,
             action = { viewModel.setErrorUiState(it, searchAdapter.itemCount) }
         )
-
         getNewsSearchResults()
     }
 
     private fun getNewsSearchResults() {
         collectLast(viewModel.state.value.news) { searchAdapter.submitData(it) }
-
     }
+
 }

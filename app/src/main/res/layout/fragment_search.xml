@@ -44,6 +44,32 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/no_result_placeholder"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:showWhenSearchQueryEmpty="@{viewModel.state.searchQuery}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/no_result" />
+
+        <TextView
+            android:id="@+id/text_placeholder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/no_result_placeholder"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"
+            app:showWhenSearchQueryEmpty="@{viewModel.state.searchQuery}"
+            android:text="@string/no_result"
+            android:textSize="12sp"
+            />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

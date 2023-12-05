@@ -17,10 +17,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-@OptIn(FlowPreview::class)
 @RequiresApi(Build.VERSION_CODES.O)
 @HiltViewModel
 class SearchViewModel @Inject constructor(
@@ -35,7 +35,7 @@ class SearchViewModel @Inject constructor(
     private fun getNews() {
         updateState { it.copy(isLoading = true) }
         tryToExecute(
-            function = { searchNews.invoke(state.value.searchQuery).debounce(1000) },
+            function = { searchNews.invoke(state.value.searchQuery) },
             onSuccess = ::onGetNewsSuccess,
             onError = ::onError
         )
@@ -64,6 +64,10 @@ class SearchViewModel @Inject constructor(
 
     override fun onClickBookMark(item: ArticleUiState) {
         TODO("Not yet implemented")
+    }
+
+    fun clearNews() {
+        updateState { it.copy(isLoading = false, news = emptyFlow()) }
     }
 
     fun setErrorUiState(combinedLoadStates: CombinedLoadStates, itemCount: Int) {
