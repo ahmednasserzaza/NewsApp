@@ -11,13 +11,15 @@ interface NewsService {
     suspend fun getEgyptNews(
         @Query("q") query: String = "Egypt",
         @Query("page") page: Int = 1,
-        @Query("pageSize") pageSize: Int = 30,
+        @Query("pageSize") pageSize: Int = 20,
         @Query("sortedBy") sortedBy: String = "popularity",
     ): Response<NewsResponse>
 
     @GET("top-headlines")
     suspend fun getLatestNews(
-        @Query("sources") sources: String = "bbc-news, the-next-web",
+        @Query("page") page: Int = 1,
+        @Query("pageSize") pageSize: Int = 20,
+        @Query("sources") sources: String = "bbc-news,the-next-web",
     ): Response<NewsResponse>
 
 

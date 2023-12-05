@@ -12,10 +12,6 @@
         <item name="colorOnTertiary">@color/md_theme_dark_onTertiary</item>
         <item name="colorTertiaryContainer">@color/md_theme_dark_tertiaryContainer</item>
         <item name="colorOnTertiaryContainer">@color/md_theme_dark_onTertiaryContainer</item>
-        <item name="colorError">@color/md_theme_dark_error</item>
-        <item name="colorErrorContainer">@color/md_theme_dark_errorContainer</item>
-        <item name="colorOnError">@color/md_theme_dark_onError</item>
-        <item name="colorOnErrorContainer">@color/md_theme_dark_onErrorContainer</item>
         <item name="android:colorBackground">@color/md_theme_dark_background</item>
         <item name="colorOnBackground">@color/md_theme_dark_onBackground</item>
         <item name="colorSurface">@color/md_theme_dark_surface</item>
@@ -26,5 +22,21 @@
         <item name="colorOnSurfaceInverse">@color/md_theme_dark_inverseOnSurface</item>
         <item name="colorSurfaceInverse">@color/md_theme_dark_inverseSurface</item>
         <item name="colorPrimaryInverse">@color/md_theme_dark_inversePrimary</item>
+    </style>
+
+    <style name="LatestNesCardStyle">
+        <item name="strokeWidth">0dp</item>
+        <item name="cardBackgroundColor">@color/md_theme_light_inverseSurface</item>
+    </style>
+
+    <style name="DateTextStyle">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/white_70</item>
+    </style>
+
+    <style name="LatestNewsTextHeaderStyle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/white_87</item>
+        <item name="android:ellipsize">end</item>
     </style>
 </resources>
