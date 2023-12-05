@@ -6,11 +6,11 @@
     <data>
         <variable
             name="item"
-            type="com.fighter.newsapp.ui.mapper.ArticleUiState" />
+            type="com.fighter.newsapp.ui.shared.ArticleUiState" />
 
         <variable
             name="listener"
-            type="com.fighter.newsapp.ui.home.adapter.NewsInteractionListener" />
+            type="com.fighter.newsapp.ui.shared.NewsInteractionListener" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

@@ -9,10 +9,10 @@ import androidx.paging.map
 import com.fighter.newsapp.domain.entity.Article
 import com.fighter.newsapp.domain.usecase.SearchNewsUseCase
 import com.fighter.newsapp.ui.base.BaseViewModel
-import com.fighter.newsapp.ui.base.ErrorState
-import com.fighter.newsapp.ui.home.adapter.NewsInteractionListener
-import com.fighter.newsapp.ui.mapper.ArticleUiState
-import com.fighter.newsapp.ui.mapper.toUiState
+import com.fighter.newsapp.ui.shared.ErrorState
+import com.fighter.newsapp.ui.shared.NewsInteractionListener
+import com.fighter.newsapp.ui.shared.ArticleUiState
+import com.fighter.newsapp.ui.shared.toUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

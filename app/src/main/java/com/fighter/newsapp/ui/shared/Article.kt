@@ -1,4 +1,4 @@
-package com.fighter.newsapp.ui.mapper
+package com.fighter.newsapp.ui.shared
 
 import android.os.Build
 import androidx.annotation.RequiresApi

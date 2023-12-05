@@ -10,7 +10,8 @@ import androidx.paging.PagingData
 import com.fighter.newsapp.R
 import com.fighter.newsapp.databinding.FragmentSearchBinding
 import com.fighter.newsapp.ui.base.BaseFragment
-import com.fighter.newsapp.ui.home.adapter.LoadUIStateAdapter
+import com.fighter.newsapp.ui.search.adapter.LoadUIStateAdapter
+import com.fighter.newsapp.ui.search.adapter.SearchAdapter
 import com.fighter.newsapp.ui.utilities.collect
 import com.fighter.newsapp.ui.utilities.collectLast
 import dagger.hilt.android.AndroidEntryPoint

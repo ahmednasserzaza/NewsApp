@@ -1,10 +1,10 @@
-package com.fighter.newsapp.ui.search
+package com.fighter.newsapp.ui.search.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 import com.fighter.newsapp.R
 import com.fighter.newsapp.ui.base.BasePagingAdapter
-import com.fighter.newsapp.ui.home.adapter.NewsInteractionListener
-import com.fighter.newsapp.ui.mapper.ArticleUiState
+import com.fighter.newsapp.ui.shared.NewsInteractionListener
+import com.fighter.newsapp.ui.shared.ArticleUiState
 
 class SearchAdapter(
     listener: NewsInteractionListener,

@@ -1,7 +1,7 @@
 package com.fighter.newsapp.ui.home
 
-import com.fighter.newsapp.ui.base.ErrorState
-import com.fighter.newsapp.ui.mapper.ArticleUiState
+import com.fighter.newsapp.ui.shared.ErrorState
+import com.fighter.newsapp.ui.shared.ArticleUiState
 
 data class HomeUiState(
     val isLoading: Boolean = false,

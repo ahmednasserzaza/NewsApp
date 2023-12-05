@@ -1,8 +1,8 @@
 package com.fighter.newsapp.ui.search
 
 import androidx.paging.PagingData
-import com.fighter.newsapp.ui.base.ErrorState
-import com.fighter.newsapp.ui.mapper.ArticleUiState
+import com.fighter.newsapp.ui.shared.ErrorState
+import com.fighter.newsapp.ui.shared.ArticleUiState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 

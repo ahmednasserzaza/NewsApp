@@ -3,6 +3,8 @@ package com.fighter.newsapp.ui.base
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fighter.newsapp.domain.utility.NewsAppException
+import com.fighter.newsapp.ui.shared.ErrorState
+import com.fighter.newsapp.ui.shared.handelApplicationExceptions
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableSharedFlow

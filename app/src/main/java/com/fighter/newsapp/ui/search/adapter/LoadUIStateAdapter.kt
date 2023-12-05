@@ -1,4 +1,4 @@
-package com.fighter.newsapp.ui.home.adapter
+package com.fighter.newsapp.ui.search.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

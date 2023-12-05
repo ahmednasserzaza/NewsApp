@@ -1,4 +1,4 @@
-package com.fighter.newsapp.ui.base
+package com.fighter.newsapp.ui.shared
 
 import com.fighter.newsapp.domain.utility.BadRequestException
 import com.fighter.newsapp.domain.utility.InternalServerException

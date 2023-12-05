@@ -1,6 +1,6 @@
 package com.fighter.newsapp.ui.bookMarks
 
-import com.fighter.newsapp.ui.base.ErrorState
+import com.fighter.newsapp.ui.shared.ErrorState
 
 sealed class BookMarksUiState {
     data object Idle : BookMarksUiState()
