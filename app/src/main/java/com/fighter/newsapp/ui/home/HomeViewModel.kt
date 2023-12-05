@@ -1,5 +1,7 @@
 package com.fighter.newsapp.ui.home
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import com.fighter.newsapp.domain.entity.Article
 import com.fighter.newsapp.domain.usecase.GetEgyptNewsUseCase
 import com.fighter.newsapp.domain.usecase.GetLatestNewsUseCase
@@ -11,6 +13,7 @@ import com.fighter.newsapp.ui.mapper.toUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+@RequiresApi(Build.VERSION_CODES.O)
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getEgyptNews: GetEgyptNewsUseCase,
@@ -32,11 +35,10 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun onGetEgyptNewsSuccess(articles: List<Article>) {
-        println("Egypt news success = $articles")
         updateState { homeUiState ->
             homeUiState.copy(
                 isLoading = false,
-                egyptNews = HomeItem.TopSlider(articles.map { it.toUiState() })
+                egyptNews = articles.map { it.toUiState() }
             )
         }
     }
@@ -54,13 +56,12 @@ class HomeViewModel @Inject constructor(
         updateState { homeUiState ->
             homeUiState.copy(
                 isLoading = false,
-                latestNews = HomeItem.LatestNews(articles.map { it.toUiState() })
+                latestNews = articles.map { it.toUiState() }
             )
         }
     }
 
     private fun onError(errorState: ErrorState) {
-        println("Egypt news Error = $errorState")
         updateState { it.copy(isLoading = false, isError = true, error = errorState) }
     }
 

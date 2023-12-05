@@ -4,10 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
-        <variable
-            name="adapterRecycler"
-            type="com.fighter.newsapp.ui.home.adapter.EgyptNewsAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,7 +14,6 @@
             android:id="@+id/recycler_slider"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:adapter="@{adapterRecycler}"
             android:orientation="horizontal"
             android:paddingHorizontal="12dp"
             android:paddingVertical="16dp"

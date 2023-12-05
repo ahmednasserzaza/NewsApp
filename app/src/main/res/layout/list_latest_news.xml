@@ -4,10 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
-        <variable
-            name="adapterRecycler"
-            type="com.fighter.newsapp.ui.home.adapter.LatestNewsAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,9 +22,9 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_latest_news"
-            android:adapter="@{adapterRecycler}"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:clipToPadding="false"
             android:orientation="vertical"
             android:paddingHorizontal="16dp"
             android:paddingVertical="12dp"

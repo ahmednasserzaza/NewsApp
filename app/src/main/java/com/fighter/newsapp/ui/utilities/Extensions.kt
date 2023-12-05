@@ -23,6 +23,16 @@ fun <T> LifecycleOwner.collectLast(flow: Flow<T>, action: suspend (T) -> Unit) {
     }
 }
 
+fun <T> LifecycleOwner.collect(flow: Flow<T>, action: suspend (T) -> Unit) {
+    lifecycleScope.launch {
+        repeatOnLifecycle(Lifecycle.State.STARTED) {
+            flow.collect {
+                action.invoke(it)
+            }
+        }
+    }
+}
+
 @RequiresApi(Build.VERSION_CODES.O)
 fun String.formatDateString(): String {
     val instant: Instant = Instant.parse(this)
