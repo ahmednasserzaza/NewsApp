@@ -3,12 +3,15 @@ package com.fighter.newsapp.ui.home
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.fighter.newsapp.R
 import com.fighter.newsapp.databinding.FragmentHomeBinding
 import com.fighter.newsapp.ui.base.BaseFragment
 import com.fighter.newsapp.ui.home.adapter.HomeAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -31,11 +34,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private fun collectNews() {
         lifecycleScope.launch {
-            viewModel.state.collect {
-                homeAdapter.setItems(mutableListOf(it.egyptNews, it.latestNews))
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.state.collectLatest {
+                    homeAdapter.setItems(mutableListOf(it.egyptNews, it.latestNews))
+                }
             }
-        }
 
+        }
     }
 
     private fun onCollectIntents(intent: HomeIntent) {
