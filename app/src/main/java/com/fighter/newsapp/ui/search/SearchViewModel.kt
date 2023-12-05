@@ -14,10 +14,7 @@ import com.fighter.newsapp.ui.home.adapter.NewsInteractionListener
 import com.fighter.newsapp.ui.mapper.ArticleUiState
 import com.fighter.newsapp.ui.mapper.toUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.debounce
-import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
@@ -28,12 +25,11 @@ class SearchViewModel @Inject constructor(
 ) : BaseViewModel<SearchUiState, SearchIntent>(SearchUiState()), NewsInteractionListener {
 
     fun onQueryTextChanged(searchTerm: CharSequence) {
-        updateState { it.copy(searchQuery = searchTerm.toString()) }
+        updateState { it.copy(searchQuery = searchTerm.toString(), isLoading = true) }
         getNews()
     }
 
     private fun getNews() {
-        updateState { it.copy(isLoading = true) }
         tryToExecute(
             function = { searchNews.invoke(state.value.searchQuery) },
             onSuccess = ::onGetNewsSuccess,
@@ -66,27 +62,23 @@ class SearchViewModel @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    fun clearNews() {
-        updateState { it.copy(isLoading = false, news = emptyFlow()) }
-    }
-
     fun setErrorUiState(combinedLoadStates: CombinedLoadStates, itemCount: Int) {
         when (combinedLoadStates.refresh) {
             is LoadState.Loading -> {
                 updateState {
-                    it.copy(isLoading = true, isError = false)
+                    it.copy(isPageLoading = true, isError = false)
                 }
             }
 
             is LoadState.Error -> {
                 updateState {
-                    it.copy(isLoading = false, isError = true, error = ErrorState.NoConnection)
+                    it.copy(isPageLoading = false, isError = true, error = ErrorState.NoConnection)
                 }
             }
 
             is LoadState.NotLoading -> {
                 if (itemCount < 1) {
-                    updateState { it.copy(isLoading = false, isError = false) }
+                    updateState { it.copy(isPageLoading = false, isError = false) }
                 }
             }
         }

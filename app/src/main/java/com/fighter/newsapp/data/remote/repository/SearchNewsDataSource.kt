@@ -4,6 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.fighter.newsapp.data.remote.model.ArticleDto
 import com.fighter.newsapp.data.remote.service.NewsService
+import com.fighter.newsapp.data.remote.utilities.handleApiResponse
 import javax.inject.Inject
 import kotlin.properties.Delegates
 
@@ -23,18 +24,19 @@ class SearchNewsDataSource @Inject constructor(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ArticleDto> {
         val pageNumber = params.key ?: 1
         return try {
-            val response = service.searchForNews(newsSearchText, pageNumber, 10)
-            val pagedResponse = response.body()
+            val response = handleApiResponse(service.searchForNews(newsSearchText, pageNumber, 10))
+            val pagedResponse = response.articles
 
             val nextPageNumber = pageNumber + 1
 
             LoadResult.Page(
-                data = pagedResponse?.articles ?: emptyList(),
+                data = pagedResponse,
                 prevKey = null,
-                nextKey = if (pagedResponse?.articles?.isEmpty() == true) null else nextPageNumber
+                nextKey = if (pagedResponse.isEmpty()) null else nextPageNumber
             )
         } catch (e: Throwable) {
             LoadResult.Error(e)
         }
     }
+
 }

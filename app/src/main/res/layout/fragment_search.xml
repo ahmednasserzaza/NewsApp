@@ -14,23 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_search_news"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:clipToPadding="false"
-            android:orientation="vertical"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="12dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_behavior="@string/searchbar_scrolling_view_behavior"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/search_bar_news"
-            tools:ignore="PrivateResource"
-            tools:listitem="@layout/item_latest_news" />
-
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/search_bar_news"
             style="@style/SearchViewStyle"
@@ -44,11 +27,31 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_search_news"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="12dp"
+            app:showWhenLoading="@{!viewModel.state.isLoading}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_behavior="@string/searchbar_scrolling_view_behavior"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/search_bar_news"
+            tools:ignore="PrivateResource"
+            tools:listitem="@layout/item_latest_news" />
+
+
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/no_result_placeholder"
             android:layout_width="100dp"
             android:layout_height="100dp"
             app:showWhenSearchQueryEmpty="@{viewModel.state.searchQuery}"
+            app:showWhenLoading="@{!viewModel.state.isLoading}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,11 +67,40 @@
             app:layout_constraintTop_toBottomOf="@+id/no_result_placeholder"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:showWhenLoading="@{!viewModel.state.isLoading}"
             android:layout_marginTop="8dp"
             app:showWhenSearchQueryEmpty="@{viewModel.state.searchQuery}"
             android:text="@string/no_result"
             android:textSize="12sp"
             />
+
+        <LinearLayout
+            android:id="@+id/latest_news_loading_effect"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical"
+            app:showWhenLoading="@{viewModel.state.isLoading}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/search_bar_news"
+            >
+
+            <include layout="@layout/item_news_loading" />
+
+            <include layout="@layout/item_news_loading" />
+
+            <include layout="@layout/item_news_loading" />
+
+            <include layout="@layout/item_news_loading" />
+
+            <include layout="@layout/item_news_loading" />
+
+            <include layout="@layout/item_news_loading" />
+
+            <include layout="@layout/item_news_loading" />
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

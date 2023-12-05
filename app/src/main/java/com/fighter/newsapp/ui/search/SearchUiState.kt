@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.emptyFlow
 
 data class SearchUiState(
     val isLoading: Boolean = false,
+    val isPageLoading:Boolean = false,
     val error: ErrorState = ErrorState.InvalidData,
     val isError: Boolean = false,
     val news: Flow<PagingData<ArticleUiState>> = emptyFlow(),

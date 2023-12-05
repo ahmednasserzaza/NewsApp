@@ -5,9 +5,9 @@ import com.fighter.newsapp.data.remote.model.ArticleDto
 
 interface NewsRepository {
 
-    suspend fun getEgyptNews(): List<ArticleDto>?
+    suspend fun getEgyptNews(): List<ArticleDto>
 
-    suspend fun getLatestNews(): List<ArticleDto>?
+    suspend fun getLatestNews(): List<ArticleDto>
 
     suspend fun searchForNews(query: String): Pager<Int, ArticleDto>
 }

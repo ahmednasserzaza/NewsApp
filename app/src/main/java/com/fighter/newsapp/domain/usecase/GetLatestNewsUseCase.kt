@@ -7,6 +7,8 @@ import javax.inject.Inject
 
 class GetLatestNewsUseCase @Inject constructor(private val newsRepository: NewsRepository) {
     suspend operator fun invoke(): List<Article> {
-        return newsRepository.getLatestNews()?.map { it.toEntity() } ?: emptyList()
+        return newsRepository.getLatestNews().sortedByDescending { articleDto ->
+            articleDto.publishedAt
+        }.map { it.toEntity() }
     }
 }

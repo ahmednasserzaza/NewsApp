@@ -1,4 +1,4 @@
-package com.fighter.newsapp.data.remote
+package com.fighter.newsapp.data.remote.utilities
 
 import com.fighter.newsapp.BuildConfig
 import okhttp3.Interceptor
