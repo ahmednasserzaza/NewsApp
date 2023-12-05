@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewModel"
             type="com.fighter.newsapp.ui.search.SearchViewModel" />
@@ -37,6 +36,8 @@
             style="@style/SearchViewStyle"
             android:layout_width="match_parent"
             android:layout_height="56dp"
+            android:text="@{viewModel.state.searchQuery}"
+            android:afterTextChanged="@{(text) -> viewModel.onQueryTextChanged(text)}"
             android:layout_margin="16dp"
             android:paddingHorizontal="16dp"
             app:layout_constraintEnd_toEndOf="parent"

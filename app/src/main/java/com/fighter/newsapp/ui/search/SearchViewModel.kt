@@ -14,28 +14,28 @@ import com.fighter.newsapp.ui.home.adapter.NewsInteractionListener
 import com.fighter.newsapp.ui.mapper.ArticleUiState
 import com.fighter.newsapp.ui.mapper.toUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
+@OptIn(FlowPreview::class)
 @RequiresApi(Build.VERSION_CODES.O)
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     private val searchNews: SearchNewsUseCase,
 ) : BaseViewModel<SearchUiState, SearchIntent>(SearchUiState()), NewsInteractionListener {
 
-    init {
-        getNews("Muslim")
+    fun onQueryTextChanged(searchTerm: CharSequence) {
+        updateState { it.copy(searchQuery = searchTerm.toString()) }
+        getNews()
     }
 
-    fun onQueryTextChanged() {
-
-    }
-
-    private fun getNews(query: String) {
+    private fun getNews() {
         updateState { it.copy(isLoading = true) }
         tryToExecute(
-            function = { searchNews.invoke(query) },
+            function = { searchNews.invoke(state.value.searchQuery).debounce(1000) },
             onSuccess = ::onGetNewsSuccess,
             onError = ::onError
         )
@@ -66,13 +66,9 @@ class SearchViewModel @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    fun setErrorUiState(combinedLoadStates: CombinedLoadStates) {
+    fun setErrorUiState(combinedLoadStates: CombinedLoadStates, itemCount: Int) {
         when (combinedLoadStates.refresh) {
-            is LoadState.NotLoading -> {
-                updateState { it.copy(isLoading = false, isError = false) }
-            }
-
-            LoadState.Loading -> {
+            is LoadState.Loading -> {
                 updateState {
                     it.copy(isLoading = true, isError = false)
                 }
@@ -81,6 +77,12 @@ class SearchViewModel @Inject constructor(
             is LoadState.Error -> {
                 updateState {
                     it.copy(isLoading = false, isError = true, error = ErrorState.NoConnection)
+                }
+            }
+
+            is LoadState.NotLoading -> {
+                if (itemCount < 1) {
+                    updateState { it.copy(isLoading = false, isError = false) }
                 }
             }
         }
