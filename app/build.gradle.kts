@@ -122,4 +122,7 @@ dependencies {
     // navigation
     implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
     implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
+
+    // shimmer animation
+    implementation("com.facebook.shimmer:shimmer:0.5.0")
 }

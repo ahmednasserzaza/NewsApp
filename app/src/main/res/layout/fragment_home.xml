@@ -17,24 +17,71 @@
 
         <include
             android:id="@+id/top_slider"
+            layout="@layout/list_top_slider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            layout="@layout/list_top_slider"
-            app:layout_constraintStart_toStartOf="parent"
+            app:showWhenLoading="@{!viewModel.state.loading}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <include
             android:id="@+id/latest_news"
+            layout="@layout/list_latest_news"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            layout="@layout/list_latest_news"
-            app:layout_constraintTop_toBottomOf="@+id/top_slider"
+            app:showWhenLoading="@{!viewModel.state.loading}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/top_slider" />
+
+        <LinearLayout
+            android:id="@+id/top_banner_loading_effect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:showWhenLoading="@{viewModel.state.loading}"
+            >
+
+            <include layout="@layout/item_top_banner_loading" />
+
+            <include layout="@layout/item_top_banner_loading" />
+
+            <include layout="@layout/item_top_banner_loading" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/latest_news_loading_effect"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/top_banner_loading_effect"
+            app:showWhenLoading="@{viewModel.state.loading}">
+
+            <include layout="@layout/item_news_loading" />
+
+            <include layout="@layout/item_news_loading" />
+
+            <include layout="@layout/item_news_loading" />
+
+            <include layout="@layout/item_news_loading" />
+
+            <include layout="@layout/item_news_loading" />
+
+            <include layout="@layout/item_news_loading" />
+
+            <include layout="@layout/item_news_loading" />
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

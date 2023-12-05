@@ -21,8 +21,8 @@ class HomeViewModel @Inject constructor(
 ) : BaseViewModel<HomeUiState, HomeIntent>(HomeUiState()), NewsInteractionListener {
 
     init {
-//        getTrendingEgyptNews()
-//        getLatestBbcNews()
+        getTrendingEgyptNews()
+        getLatestBbcNews()
     }
 
     private fun getTrendingEgyptNews() {

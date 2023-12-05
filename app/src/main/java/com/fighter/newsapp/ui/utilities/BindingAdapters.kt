@@ -24,3 +24,12 @@ fun showWhenListIsEmpty(view: View, text: String) {
         view.visibility = View.GONE
     }
 }
+
+@BindingAdapter(value = ["app:showWhenLoading"])
+fun showWhenStetIsLoading(view: View, isLoading: Boolean) {
+    if (isLoading) {
+        view.visibility = View.VISIBLE
+    } else {
+        view.visibility = View.GONE
+    }
+}
