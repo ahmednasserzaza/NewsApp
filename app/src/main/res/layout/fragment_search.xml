@@ -36,7 +36,7 @@
             android:orientation="vertical"
             android:paddingHorizontal="16dp"
             android:paddingVertical="12dp"
-            app:hideIfTrue="@{viewModel.state.isLoading}"
+            app:hideIfTrue="@{viewModel.state.isLoading || viewModel.state.isError}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_behavior="@string/searchbar_scrolling_view_behavior"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -47,6 +47,7 @@
             tools:listitem="@layout/item_latest_news" />
 
         <LinearLayout
+            android:id="@+id/not_found_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -54,6 +55,7 @@
             app:hidePlaceHolderIfEmptyQuery="@{viewModel.state.searchQuery}"
             app:hidePlaceHolderIfLoading="@{viewModel.state.isLoading}"
             app:hidePlaceholderIfError="@{viewModel.state.isError}"
+            app:showPlaceholderIfNoItems="@{viewModel.state.itemCount}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -113,7 +115,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:gravity="center"
-                app:setErrorTextBasedOnError="@{viewModel.state.error}" />
+                android:text="@string/something_went_wrong"
+                />
 
             <Button
                 android:id="@+id/button_retry"
@@ -128,14 +131,13 @@
 
         </LinearLayout>
 
-
         <LinearLayout
             android:id="@+id/latest_news_loading_effect"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="16dp"
             android:orientation="vertical"
-            app:hideIfTrue="@{!viewModel.state.isPageLoading || !viewModel.state.isLoading}"
+            app:hideIfTrue="@{!viewModel.state.isLoading}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

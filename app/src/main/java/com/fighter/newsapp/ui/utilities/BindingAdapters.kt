@@ -35,18 +35,29 @@ fun showIfHasError(view: View, isLoading: Boolean, hasError: Boolean) {
     }
 }
 
-@BindingAdapter(value = ["app:hidePlaceHolderIfLoading", "app:hidePlaceHolderIfEmptyQuery", "app:hidePlaceholderIfError"])
+@BindingAdapter(
+    value = [
+        "app:hidePlaceHolderIfLoading",
+        "app:hidePlaceHolderIfEmptyQuery",
+        "app:hidePlaceholderIfError",
+        "app:showPlaceholderIfNoItems",
+    ]
+)
 fun handleNoResultPlaceholderVisibility(
     view: View,
     isLoading: Boolean,
     query: String,
     hasError: Boolean,
+    itemsCount: Int,
 ) {
-    view.visibility = when {
-        !isLoading && query.isEmpty() && !hasError -> View.VISIBLE
-        else -> View.GONE
+    if ((!isLoading && itemsCount < 1 && query.isEmpty() && !hasError)
+        || (!isLoading && itemsCount < 1 && query.isNotEmpty() && !hasError)) {
+        view.visibility = View.VISIBLE
+    } else {
+        view.visibility = View.GONE
     }
 }
+
 
 @SuppressLint("SetTextI18n")
 @BindingAdapter("app:setErrorTextBasedOnError")

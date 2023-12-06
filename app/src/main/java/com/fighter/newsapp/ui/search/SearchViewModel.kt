@@ -9,14 +9,12 @@ import androidx.paging.map
 import com.fighter.newsapp.domain.entity.Article
 import com.fighter.newsapp.domain.usecase.SearchNewsUseCase
 import com.fighter.newsapp.ui.base.BaseViewModel
+import com.fighter.newsapp.ui.shared.ArticleUiState
 import com.fighter.newsapp.ui.shared.ErrorState
 import com.fighter.newsapp.ui.shared.NewsInteractionListener
-import com.fighter.newsapp.ui.shared.ArticleUiState
 import com.fighter.newsapp.ui.shared.toUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
@@ -32,7 +30,7 @@ class SearchViewModel @Inject constructor(
     }
 
     private fun getNews() {
-        updateState { it.copy( isLoading = true) }
+        updateState { it.copy(isLoading = true) }
         tryToExecute(
             function = { searchNews.invoke(state.value.searchQuery) },
             onSuccess = ::onGetNewsSuccess,
@@ -43,7 +41,6 @@ class SearchViewModel @Inject constructor(
     private fun onGetNewsSuccess(newsDataFlow: Flow<PagingData<Article>>) {
         updateState {
             it.copy(
-                isLoading = false,
                 news = newsDataFlow.map { pagingData ->
                     pagingData.map { article ->
                         article.toUiState()
@@ -69,22 +66,36 @@ class SearchViewModel @Inject constructor(
         when (combinedLoadStates.refresh) {
             is LoadState.Loading -> {
                 updateState {
-                    it.copy(isPageLoading = true, isError = false)
+                    it.copy(isLoading = false, isError = false, itemCount = itemCount)
                 }
             }
 
             is LoadState.Error -> {
                 updateState {
-                    it.copy(isPageLoading = false, isError = true, error = ErrorState.NoConnection)
+                    it.copy(
+                        isLoading = false,
+                        isError = true,
+                        error = ErrorState.NoConnection,
+                        itemCount = itemCount
+                    )
                 }
             }
 
             is LoadState.NotLoading -> {
-                if (itemCount < 1) {
-                    updateState { it.copy(isPageLoading = false, isError = false) }
+                updateState {
+                    it.copy(
+                        isLoading = false,
+                        isError = false,
+                        itemCount = itemCount
+                    )
                 }
+
             }
         }
+    }
+
+    fun resetUiStates() {
+        updateState { SearchUiState() }
     }
 
     override fun getData() {

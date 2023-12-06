@@ -46,6 +46,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                 } else if (searchUiState.searchQuery.trim().isEmpty()) {
                     searchAdapter.submitData(PagingData.empty())
                     oldValue.emit(SearchUiState())
+                    viewModel.resetUiStates()
                 }
             }
         }
