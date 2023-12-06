@@ -7,4 +7,7 @@ import javax.inject.Inject
 @HiltViewModel
 class NewsDetailsViewModel @Inject constructor() :
     BaseViewModel<NewsDetailsUiState, NewsDetailsIntent>(NewsDetailsUiState.Idle) {
+    override fun getData() {
+        TODO("Not yet implemented")
+    }
 }

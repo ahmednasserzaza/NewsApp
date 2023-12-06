@@ -38,5 +38,4 @@ class SearchNewsDataSource @Inject constructor(
             LoadResult.Error(e)
         }
     }
-
 }

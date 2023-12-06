@@ -7,4 +7,7 @@ import javax.inject.Inject
 @HiltViewModel
 class BookMarksViewModel @Inject constructor() :
     BaseViewModel<BookMarksUiState, BookMarksIntent>(BookMarksUiState.Idle) {
+    override fun getData() {
+        TODO("Not yet implemented")
+    }
 }

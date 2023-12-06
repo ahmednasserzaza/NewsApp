@@ -73,4 +73,9 @@ class HomeViewModel @Inject constructor(
         TODO("Not yet implemented")
     }
 
+    override fun getData() {
+        getTrendingEgyptNews()
+        getLatestBbcNews()
+    }
+
 }

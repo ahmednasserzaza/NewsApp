@@ -25,11 +25,12 @@ class SearchViewModel @Inject constructor(
 ) : BaseViewModel<SearchUiState, SearchIntent>(SearchUiState()), NewsInteractionListener {
 
     fun onQueryTextChanged(searchTerm: CharSequence) {
-        updateState { it.copy(searchQuery = searchTerm.toString(), isLoading = true) }
+        updateState { it.copy(searchQuery = searchTerm.toString()) }
         getNews()
     }
 
     private fun getNews() {
+        updateState { it.copy( isLoading = true) }
         tryToExecute(
             function = { searchNews.invoke(state.value.searchQuery) },
             onSuccess = ::onGetNewsSuccess,
@@ -82,5 +83,9 @@ class SearchViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    override fun getData() {
+        getNews()
     }
 }

@@ -42,7 +42,7 @@ abstract class BaseViewModel<S, I>(initialState: S) : ViewModel() {
                 action()
             } catch (exception: Exception) {
                 if (exception is NewsAppException) handelApplicationExceptions(exception, onError)
-                else onError(ErrorState.InvalidData)
+                else onError(ErrorState.NoConnection)
             }
         }
     }
@@ -56,4 +56,6 @@ abstract class BaseViewModel<S, I>(initialState: S) : ViewModel() {
             _intent.emit(newEffect)
         }
     }
+
+    abstract fun getData()
 }
