@@ -31,7 +31,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        bindNews()
         getSearchResultsBySearchTerm()
     }
 
@@ -42,11 +41,11 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                 if (searchUiState.searchQuery.trim().isNotEmpty()
                     && (oldValue.value.searchQuery != viewModel.state.value.searchQuery)
                 ) {
-                    oldValue.emit(viewModel.state.value)
                     bindNews()
+                    oldValue.emit(viewModel.state.value)
                 } else if (searchUiState.searchQuery.trim().isEmpty()) {
-                    oldValue.emit(SearchUiState())
                     searchAdapter.submitData(PagingData.empty())
+                    oldValue.emit(SearchUiState())
                 }
             }
         }
