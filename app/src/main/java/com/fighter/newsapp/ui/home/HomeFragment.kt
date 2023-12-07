@@ -2,7 +2,6 @@ package com.fighter.newsapp.ui.home
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -12,6 +11,8 @@ import com.fighter.newsapp.databinding.FragmentHomeBinding
 import com.fighter.newsapp.ui.base.BaseFragment
 import com.fighter.newsapp.ui.home.adapter.EgyptNewsAdapter
 import com.fighter.newsapp.ui.home.adapter.LatestNewsAdapter
+import com.fighter.newsapp.ui.shared.ArticleUiState
+import com.fighter.newsapp.ui.utilities.findNavControllerSafely
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -57,22 +58,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
     }
 
+    private fun navigateToArticleDetails(article: ArticleUiState) {
+        val action = HomeFragmentDirections
+            .actionHomeFragmentToNewsDetailsFragment(article)
+        findNavControllerSafely(R.id.homeFragment)?.navigate(action)
+    }
+
     private fun collectIntents(intent: SharedFlow<HomeIntent>) {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 intent.collectLatest { homeIntent ->
                     when (homeIntent) {
-                        is HomeIntent.OnNavigateToNewsDetails -> Toast.makeText(
-                            activity?.applicationContext,
-                            homeIntent.articleTitle,
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        is HomeIntent.OnNavigateToNewsDetails -> navigateToArticleDetails(homeIntent.article)
 
-                        is HomeIntent.OnAddNewsToBookMarks -> Toast.makeText(
-                            activity?.applicationContext,
-                            homeIntent.article.publishedAt,
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        is HomeIntent.OnAddNewsToBookMarks -> {}
                     }
                 }
             }

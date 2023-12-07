@@ -7,6 +7,7 @@ plugins {
     id("com.google.dagger.hilt.android")
     id("androidx.navigation.safeargs")
     kotlin("kapt")
+    id("kotlin-parcelize")
 }
 
 val localProps = Properties()

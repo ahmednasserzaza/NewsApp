@@ -2,10 +2,13 @@ package com.fighter.newsapp.ui.utilities
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -30,6 +33,14 @@ fun <T> LifecycleOwner.collect(flow: Flow<T>, action: suspend (T) -> Unit) {
                 action.invoke(it)
             }
         }
+    }
+}
+
+fun Fragment.findNavControllerSafely(id: Int): NavController? {
+    return if (findNavController().currentDestination?.id == id) {
+        findNavController()
+    } else {
+        null
     }
 }
 

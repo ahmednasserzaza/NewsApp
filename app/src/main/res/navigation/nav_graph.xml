@@ -8,21 +8,33 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.fighter.newsapp.ui.home.HomeFragment"
-        tools:layout="@layout/fragment_home"
-        android:label="NewsApp" />
+        android:label="NewsApp"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_newsDetailsFragment"
+            app:destination="@id/newsDetailsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+    </fragment>
     <fragment
         android:id="@+id/searchFragment"
-        tools:layout="@layout/fragment_search"
         android:name="com.fighter.newsapp.ui.search.SearchFragment"
-        android:label="Search" />
+        android:label="Search"
+        tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/bookMarksFragment"
-        tools:layout="@layout/fragment_book_marks"
         android:name="com.fighter.newsapp.ui.bookMarks.BookMarksFragment"
-        android:label="Bookmarks" />
+        android:label="Bookmarks"
+        tools:layout="@layout/fragment_book_marks" />
     <fragment
         android:id="@+id/newsDetailsFragment"
-        tools:layout="@layout/fragment_news_details"
         android:name="com.fighter.newsapp.ui.newsDetails.NewsDetailsFragment"
-        android:label="News details" />
+        android:label="News details"
+        tools:layout="@layout/fragment_news_details">
+        <argument
+            android:name="article"
+            app:argType="com.fighter.newsapp.ui.shared.ArticleUiState" />
+    </fragment>
 </navigation>

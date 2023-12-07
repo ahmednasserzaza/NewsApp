@@ -66,7 +66,7 @@ class HomeViewModel @Inject constructor(
     }
 
     override fun onClickNewsItem(item: ArticleUiState) {
-        sendNewIntent(HomeIntent.OnNavigateToNewsDetails(item.title))
+        sendNewIntent(HomeIntent.OnNavigateToNewsDetails(item))
     }
 
     override fun onClickBookMark(item: ArticleUiState) {

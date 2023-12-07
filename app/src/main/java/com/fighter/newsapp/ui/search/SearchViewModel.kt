@@ -56,7 +56,7 @@ class SearchViewModel @Inject constructor(
     }
 
     override fun onClickNewsItem(item: ArticleUiState) {
-        sendNewIntent(SearchIntent.OnNavigateToNewsDetails(item.title))
+        sendNewIntent(SearchIntent.OnNavigateToNewsDetails(item))
     }
 
     override fun onClickBookMark(item: ArticleUiState) {

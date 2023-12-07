@@ -81,7 +81,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                     when (it) {
                         is SearchIntent.OnNavigateToNewsDetails -> Toast.makeText(
                             activity?.applicationContext,
-                            it.articleTitle,
+                            it.article.title,
                             Toast.LENGTH_SHORT
                         ).show()
 
