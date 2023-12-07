@@ -9,6 +9,7 @@ import androidx.paging.map
 import com.fighter.newsapp.domain.entity.Article
 import com.fighter.newsapp.domain.usecase.SearchNewsUseCase
 import com.fighter.newsapp.ui.base.BaseViewModel
+import com.fighter.newsapp.ui.home.HomeIntent
 import com.fighter.newsapp.ui.shared.ArticleUiState
 import com.fighter.newsapp.ui.shared.ErrorState
 import com.fighter.newsapp.ui.shared.NewsInteractionListener
@@ -54,12 +55,12 @@ class SearchViewModel @Inject constructor(
         updateState { it.copy(isLoading = false, isError = true, error = errorState) }
     }
 
-    override fun onClickNewsItem(newsTitle: String) {
-        TODO("Not yet implemented")
+    override fun onClickNewsItem(item: ArticleUiState) {
+        sendNewIntent(SearchIntent.OnNavigateToNewsDetails(item.title))
     }
 
     override fun onClickBookMark(item: ArticleUiState) {
-        TODO("Not yet implemented")
+        sendNewIntent(SearchIntent.OnAddNewsToBookMarks(item))
     }
 
     fun setErrorUiState(combinedLoadStates: CombinedLoadStates, itemCount: Int) {

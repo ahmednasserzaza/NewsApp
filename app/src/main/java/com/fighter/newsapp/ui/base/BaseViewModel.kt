@@ -51,7 +51,7 @@ abstract class BaseViewModel<S, I>(initialState: S) : ViewModel() {
         _state.update(updater)
     }
 
-    protected fun sendNewEffect(newEffect: I) {
+    protected fun sendNewIntent(newEffect: I) {
         viewModelScope.launch(Dispatchers.IO) {
             _intent.emit(newEffect)
         }

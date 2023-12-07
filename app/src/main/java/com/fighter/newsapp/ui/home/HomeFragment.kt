@@ -2,15 +2,18 @@ package com.fighter.newsapp.ui.home
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.fighter.newsapp.R
 import com.fighter.newsapp.databinding.FragmentHomeBinding
 import com.fighter.newsapp.ui.base.BaseFragment
 import com.fighter.newsapp.ui.home.adapter.EgyptNewsAdapter
 import com.fighter.newsapp.ui.home.adapter.LatestNewsAdapter
-import com.fighter.newsapp.ui.utilities.collect
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -35,6 +38,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         super.onViewCreated(view, savedInstanceState)
         setAdapters()
         collectNews()
+        collectIntents(viewModel.intent)
     }
 
     private fun setAdapters() {
@@ -51,9 +55,25 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
     }
 
-    private fun onCollectIntents(intent: HomeIntent) {
-        when (intent) {
-            is HomeIntent.OnNavigateToNewsDetails -> TODO()
+    private fun collectIntents(intent: SharedFlow<HomeIntent>) {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                intent.collectLatest {
+                    when (it) {
+                        is HomeIntent.OnNavigateToNewsDetails -> Toast.makeText(
+                            activity?.applicationContext,
+                            it.articleTitle,
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                        is HomeIntent.OnAddNewsToBookMarks -> Toast.makeText(
+                            activity?.applicationContext,
+                            it.article.publishedAt,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            }
         }
     }
 }

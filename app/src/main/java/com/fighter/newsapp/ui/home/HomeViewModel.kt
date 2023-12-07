@@ -6,9 +6,9 @@ import com.fighter.newsapp.domain.entity.Article
 import com.fighter.newsapp.domain.usecase.GetEgyptNewsUseCase
 import com.fighter.newsapp.domain.usecase.GetLatestNewsUseCase
 import com.fighter.newsapp.ui.base.BaseViewModel
+import com.fighter.newsapp.ui.shared.ArticleUiState
 import com.fighter.newsapp.ui.shared.ErrorState
 import com.fighter.newsapp.ui.shared.NewsInteractionListener
-import com.fighter.newsapp.ui.shared.ArticleUiState
 import com.fighter.newsapp.ui.shared.toUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -21,8 +21,8 @@ class HomeViewModel @Inject constructor(
 ) : BaseViewModel<HomeUiState, HomeIntent>(HomeUiState()), NewsInteractionListener {
 
     init {
-//        getTrendingEgyptNews()
-//        getLatestBbcNews()
+        getTrendingEgyptNews()
+        getLatestBbcNews()
     }
 
     private fun getTrendingEgyptNews() {
@@ -65,12 +65,12 @@ class HomeViewModel @Inject constructor(
         updateState { it.copy(isLoading = false, isError = true, error = errorState) }
     }
 
-    override fun onClickNewsItem(newsTitle: String) {
-        TODO("Not yet implemented")
+    override fun onClickNewsItem(item: ArticleUiState) {
+        sendNewIntent(HomeIntent.OnNavigateToNewsDetails(item.title))
     }
 
     override fun onClickBookMark(item: ArticleUiState) {
-        TODO("Not yet implemented")
+        sendNewIntent(HomeIntent.OnAddNewsToBookMarks(item))
     }
 
     override fun getData() {
