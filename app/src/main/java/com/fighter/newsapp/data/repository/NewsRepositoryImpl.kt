@@ -2,15 +2,19 @@ package com.fighter.newsapp.data.repository
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
+import com.fighter.newsapp.data.local.ArticleDao
+import com.fighter.newsapp.data.local.ArticleEntity
 import com.fighter.newsapp.data.remote.model.ArticleDto
 import com.fighter.newsapp.data.remote.NewsService
 import com.fighter.newsapp.data.remote.SearchNewsDataSource
 import com.fighter.newsapp.data.remote.utilities.handleApiResponse
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class NewsRepositoryImpl @Inject constructor(
     private val service: NewsService,
     private val searchNewsDataSource: SearchNewsDataSource,
+    private val articleDao: ArticleDao,
 ) : NewsRepository {
 
     private val config =
@@ -29,5 +33,17 @@ class NewsRepositoryImpl @Inject constructor(
     override suspend fun searchForNews(query: String): Pager<Int, ArticleDto> {
         searchNewsDataSource.setSearchText(query)
         return Pager(config = config, pagingSourceFactory = { searchNewsDataSource })
+    }
+
+    override suspend fun saveArticle(article: ArticleEntity) {
+        return articleDao.insertArticle(article)
+    }
+
+    override suspend fun deleteArticle(article: ArticleEntity) {
+        return articleDao.deleteArticle(article)
+    }
+
+    override suspend fun getAllArticles(): Flow<List<ArticleEntity>> {
+        return articleDao.getAllArticles()
     }
 }

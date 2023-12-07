@@ -1,5 +1,7 @@
 package com.fighter.newsapp.domain.entity
 
+import com.fighter.newsapp.data.local.ArticleEntity
+
 data class Article(
     val author: String,
     val title: String,
@@ -9,3 +11,13 @@ data class Article(
     val publishedAt: String,
     val content: String,
 )
+
+fun Article.toArticleEntity(): ArticleEntity {
+    return ArticleEntity(
+        articleHeader = title,
+        articleDescription = description,
+        articleContent = content,
+        articleDate = publishedAt,
+        articleImageUrl = imageUrl,
+    )
+}
