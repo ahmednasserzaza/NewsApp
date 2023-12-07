@@ -1,17 +1,11 @@
-package com.fighter.newsapp.data.remote.repository
+package com.fighter.newsapp.data.repository
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import com.fighter.newsapp.data.remote.model.ArticleDto
-import com.fighter.newsapp.data.remote.service.NewsService
+import com.fighter.newsapp.data.remote.NewsService
+import com.fighter.newsapp.data.remote.SearchNewsDataSource
 import com.fighter.newsapp.data.remote.utilities.handleApiResponse
-import com.fighter.newsapp.domain.utility.BadRequestException
-import com.fighter.newsapp.domain.utility.InternalServerException
-import com.fighter.newsapp.domain.utility.NetworkException
-import com.fighter.newsapp.domain.utility.NotFoundException
-import com.fighter.newsapp.domain.utility.TooManyRequestsException
-import com.fighter.newsapp.domain.utility.UnAuthorizedException
-import retrofit2.Response
 import javax.inject.Inject
 
 class NewsRepositoryImpl @Inject constructor(
@@ -30,7 +24,6 @@ class NewsRepositoryImpl @Inject constructor(
     override suspend fun getLatestNews(): List<ArticleDto> {
         val result = handleApiResponse(service.getLatestNews())
         return result.articles
-
     }
 
     override suspend fun searchForNews(query: String): Pager<Int, ArticleDto> {

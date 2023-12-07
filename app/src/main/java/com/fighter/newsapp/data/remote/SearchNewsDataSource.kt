@@ -1,9 +1,9 @@
-package com.fighter.newsapp.data.remote.repository
+package com.fighter.newsapp.data.remote
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.fighter.newsapp.data.remote.model.ArticleDto
-import com.fighter.newsapp.data.remote.service.NewsService
+import com.fighter.newsapp.data.remote.NewsService
 import com.fighter.newsapp.data.remote.utilities.handleApiResponse
 import javax.inject.Inject
 import kotlin.properties.Delegates

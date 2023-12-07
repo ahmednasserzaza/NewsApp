@@ -1,7 +1,7 @@
 package com.fighter.newsapp.domain.usecase
 
 import com.fighter.newsapp.data.remote.model.toEntity
-import com.fighter.newsapp.data.remote.repository.NewsRepository
+import com.fighter.newsapp.data.repository.NewsRepository
 import com.fighter.newsapp.domain.entity.Article
 import javax.inject.Inject
 

@@ -1,4 +1,4 @@
-package com.fighter.newsapp.data.remote.service
+package com.fighter.newsapp.data.remote
 
 import com.fighter.newsapp.data.remote.model.NewsResponse
 import retrofit2.Response

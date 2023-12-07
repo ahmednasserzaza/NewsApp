@@ -1,7 +1,7 @@
 package com.fighter.newsapp.di
 
 import com.fighter.newsapp.data.remote.utilities.AuthInterceptor
-import com.fighter.newsapp.data.remote.service.NewsService
+import com.fighter.newsapp.data.remote.NewsService
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
