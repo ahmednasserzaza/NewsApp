@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.fighter.newsapp.ui.search.SearchViewModel" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/search_bar_news"
+            style="@style/SearchViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_margin="16dp"
+            android:afterTextChanged="@{(text) -> viewModel.onQueryTextChanged(text)}"
+            android:paddingHorizontal="16dp"
+            android:text="@{viewModel.state.searchQuery}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_search_news"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="12dp"
+            app:hideIfTrue="@{viewModel.state.isLoading || viewModel.state.isError}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_behavior="@string/searchbar_scrolling_view_behavior"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/search_bar_news"
+            tools:ignore="PrivateResource"
+            tools:listitem="@layout/item_latest_news" />
+
+        <LinearLayout
+            android:id="@+id/not_found_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:hidePlaceHolderIfEmptyQuery="@{viewModel.state.searchQuery}"
+            app:hidePlaceHolderIfLoading="@{viewModel.state.isLoading}"
+            app:hidePlaceholderIfError="@{viewModel.state.isError}"
+            app:showPlaceholderIfNoItems="@{viewModel.state.itemCount}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/no_result_placeholder"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/no_result" />
+
+            <TextView
+                android:id="@+id/text_placeholder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/no_result"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/error_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:showIfLoading="@{viewModel.state.isLoading}"
+            app:showIfHasError="@{viewModel.state.isError}"
+            >
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/animation_lost_connection"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginBottom="8dp"
+                app:lottie_colorFilter="@color/white_38"
+                app:lottie_autoPlay="true"
+                app:lottie_repeatMode="restart"
+                app:lottie_rawRes="@raw/error" />
+
+            <TextView
+                android:id="@+id/title_lost_connection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/oops" />
+
+            <TextView
+                android:id="@+id/description_lost_connection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:text="@string/something_went_wrong"
+                />
+
+            <Button
+                android:id="@+id/button_retry"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/white_87"
+                android:backgroundTint="@color/md_theme_dark_inversePrimary"
+                android:onClick="@{() -> viewModel.getData()}"
+                android:text="@string/retry"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/latest_news_loading_effect"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical"
+            app:hideIfTrue="@{!viewModel.state.isLoading}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/search_bar_news">
+
+            <include layout="@layout/item_news_loading" />
+
+            <include layout="@layout/item_news_loading" />
+
+            <include layout="@layout/item_news_loading" />
+
+            <include layout="@layout/item_news_loading" />
+
+            <include layout="@layout/item_news_loading" />
+
+            <include layout="@layout/item_news_loading" />
+
+            <include layout="@layout/item_news_loading" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.fighter.newsapp.ui.home.HomeViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.home.HomeFragment">
+
+        <include
+            android:id="@+id/top_slider"
+            layout="@layout/list_top_slider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hideIfTrue="@{viewModel.state.isLoading || viewModel.state.isError}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/latest_news"
+            layout="@layout/list_latest_news"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:hideIfTrue="@{viewModel.state.isLoading || viewModel.state.isError}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/top_slider"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:showIfLoading="@{viewModel.state.isLoading}"
+            app:showIfHasError="@{viewModel.state.isError}"
+            >
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/animation_lost_connection"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginBottom="8dp"
+                app:lottie_colorFilter="@color/white_38"
+                app:lottie_autoPlay="true"
+                app:lottie_repeatMode="restart"
+                app:lottie_rawRes="@raw/error" />
+
+            <TextView
+                android:id="@+id/title_lost_connection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/oops" />
+
+            <TextView
+                android:id="@+id/description_lost_connection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                app:setErrorTextBasedOnError="@{viewModel.state.error}" />
+
+            <Button
+                android:id="@+id/button_retry"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/white_87"
+                android:backgroundTint="@color/md_theme_dark_inversePrimary"
+                android:onClick="@{() -> viewModel.getData()}"
+                android:text="@string/retry"
+              />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/top_banner_loading_effect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            app:hideIfTrue="@{!viewModel.state.isLoading}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+            <include layout="@layout/item_top_banner_loading" />
+
+            <include layout="@layout/item_top_banner_loading" />
+
+            <include layout="@layout/item_top_banner_loading" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/latest_news_loading_effect"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical"
+            app:hideIfTrue="@{!viewModel.state.isLoading}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/top_banner_loading_effect"
+            >
+
+            <include layout="@layout/item_news_loading" />
+
+            <include layout="@layout/item_news_loading" />
+
+            <include layout="@layout/item_news_loading" />
+
+            <include layout="@layout/item_news_loading" />
+
+            <include layout="@layout/item_news_loading" />
+
+            <include layout="@layout/item_news_loading" />
+
+            <include layout="@layout/item_news_loading" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

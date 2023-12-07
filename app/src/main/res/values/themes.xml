@@ -1,9 +1,85 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.NewsApp" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+<resources >
+    <style name="AppTheme" parent="Theme.Material3.Light">
+        <item name="colorPrimary">@color/md_theme_light_primary</item>
+        <item name="colorOnPrimary">@color/md_theme_light_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/md_theme_light_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/md_theme_light_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/md_theme_light_secondary</item>
+        <item name="colorOnSecondary">@color/md_theme_light_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/md_theme_light_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/md_theme_light_onSecondaryContainer</item>
+        <item name="colorTertiary">@color/md_theme_light_tertiary</item>
+        <item name="colorOnTertiary">@color/md_theme_light_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/md_theme_light_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/md_theme_light_onTertiaryContainer</item>
+        <item name="android:colorBackground">@color/md_theme_light_background</item>
+        <item name="colorOnBackground">@color/md_theme_light_onBackground</item>
+        <item name="colorSurface">@color/md_theme_light_surface</item>
+        <item name="colorOnSurface">@color/md_theme_light_onSurface</item>
+        <item name="colorSurfaceVariant">@color/md_theme_light_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/md_theme_light_onSurfaceVariant</item>
+        <item name="colorOutline">@color/md_theme_light_outline</item>
+        <item name="colorOnSurfaceInverse">@color/md_theme_light_inverseOnSurface</item>
+        <item name="colorSurfaceInverse">@color/md_theme_light_inverseSurface</item>
+        <item name="colorPrimaryInverse">@color/md_theme_light_inversePrimary</item>
     </style>
 
-    <style name="Theme.NewsApp" parent="Base.Theme.NewsApp" />
+
+    <style name="LatestNesCardStyle" parent="AppTheme">
+        <item name="strokeWidth">0dp</item>
+        <item name="cardBackgroundColor">@color/md_theme_light_surfaceVariant</item>
+    </style>
+
+    <style name="DateTextStyle">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/black_70</item>
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="TopBannerTextHeader">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white_87</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">3</item>
+        <item name="android:fontFamily">@font/poppins_semibold</item>
+    </style>
+
+    <style name="NewsTextHeader">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/black_87</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">3</item>
+        <item name="android:fontFamily">@font/poppins_semibold</item>
+    </style>
+
+    <style name="SearchViewStyle">
+        <item name="android:background">@drawable/search_shape_light</item>
+        <item name="android:drawableStart">@drawable/ic_search</item>
+        <item name="android:drawablePadding">16dp</item>
+        <item name="android:drawableTint">@color/black_70</item>
+        <item name="android:hint">@string/search_news</item>
+        <item name="android:textColor">@color/black_87</item>
+        <item name="android:fontFamily">@font/poppins</item>
+    </style>
+
+    <style name="ArticleHeaderStyle">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/black_87</item>
+        <item name="android:fontFamily">@font/poppins_semibold</item>
+    </style>
+
+    <style name="ArticleDescriptionStyle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/black_70</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="ArticleContentStyle">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/black_70</item>
+        <item name="android:fontFamily">@font/poppins</item>
+    </style>
+
 </resources>
