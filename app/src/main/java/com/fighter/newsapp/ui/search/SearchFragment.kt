@@ -42,16 +42,18 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     @OptIn(FlowPreview::class)
     private fun getSearchResultsBySearchTerm() {
         lifecycleScope.launch {
-            viewModel.state.debounce(1000).collectLatest { searchUiState ->
-                if (searchUiState.searchQuery.trim().isNotEmpty()
-                    && (oldValue.value.searchQuery != viewModel.state.value.searchQuery)
-                ) {
-                    bindNews()
-                    oldValue.emit(viewModel.state.value)
-                } else if (searchUiState.searchQuery.trim().isEmpty()) {
-                    searchAdapter.submitData(PagingData.empty())
-                    oldValue.emit(SearchUiState())
-                    viewModel.resetUiStates()
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.state.debounce(1000).collectLatest { searchUiState ->
+                    if (searchUiState.searchQuery.trim().isNotEmpty()
+                        && (oldValue.value.searchQuery != viewModel.state.value.searchQuery)
+                    ) {
+                        bindNews()
+                        oldValue.emit(viewModel.state.value)
+                    } else if (searchUiState.searchQuery.trim().isEmpty()) {
+                        searchAdapter.submitData(PagingData.empty())
+                        oldValue.emit(SearchUiState())
+                        viewModel.resetUiStates()
+                    }
                 }
             }
         }
@@ -95,5 +97,4 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
             }
         }
     }
-
 }

@@ -48,9 +48,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private fun collectNews() {
         lifecycleScope.launch {
-            viewModel.state.collectLatest { homeUiState ->
-                topNewsAdapter.setItems(homeUiState.egyptNews)
-                latestNewsAdapter.setItems(homeUiState.latestNews)
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.state.collectLatest { homeUiState ->
+                    topNewsAdapter.setItems(homeUiState.egyptNews)
+                    latestNewsAdapter.setItems(homeUiState.latestNews)
+                }
             }
         }
     }
@@ -58,17 +60,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private fun collectIntents(intent: SharedFlow<HomeIntent>) {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                intent.collectLatest {
-                    when (it) {
+                intent.collectLatest { homeIntent ->
+                    when (homeIntent) {
                         is HomeIntent.OnNavigateToNewsDetails -> Toast.makeText(
                             activity?.applicationContext,
-                            it.articleTitle,
+                            homeIntent.articleTitle,
                             Toast.LENGTH_SHORT
                         ).show()
 
                         is HomeIntent.OnAddNewsToBookMarks -> Toast.makeText(
                             activity?.applicationContext,
-                            it.article.publishedAt,
+                            homeIntent.article.publishedAt,
                             Toast.LENGTH_SHORT
                         ).show()
                     }
