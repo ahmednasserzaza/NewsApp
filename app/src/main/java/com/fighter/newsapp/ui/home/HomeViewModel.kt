@@ -3,12 +3,15 @@ package com.fighter.newsapp.ui.home
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.fighter.newsapp.domain.entity.Article
+import com.fighter.newsapp.domain.usecase.DeleteArticleUseCase
 import com.fighter.newsapp.domain.usecase.GetEgyptNewsUseCase
 import com.fighter.newsapp.domain.usecase.GetLatestNewsUseCase
+import com.fighter.newsapp.domain.usecase.SaveArticleUseCase
 import com.fighter.newsapp.ui.base.BaseViewModel
 import com.fighter.newsapp.ui.shared.ArticleUiState
 import com.fighter.newsapp.ui.shared.ErrorState
 import com.fighter.newsapp.ui.shared.NewsInteractionListener
+import com.fighter.newsapp.ui.shared.toEntity
 import com.fighter.newsapp.ui.shared.toUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -18,6 +21,8 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val getEgyptNews: GetEgyptNewsUseCase,
     private val getLatestNews: GetLatestNewsUseCase,
+    private val deleteArticle: DeleteArticleUseCase,
+    private val saveArticle: SaveArticleUseCase,
 ) : BaseViewModel<HomeUiState, HomeIntent>(HomeUiState()), NewsInteractionListener {
 
     init {
@@ -61,16 +66,48 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    private fun saveArticleToBookMarks(article: ArticleUiState) {
+        updateState { it.copy(isLoading = true) }
+        tryToExecute(
+            function = { saveArticle.invoke(article.toEntity()) },
+            onSuccess = { onSaveArticleToBookmarksSuccess() },
+            onError = ::onError
+        )
+    }
+
+    private fun onSaveArticleToBookmarksSuccess() {
+        updateState { it.copy(isLoading = false) }
+        sendNewIntent(HomeIntent.OnAddArticleToBookmarks)
+    }
+
+    private fun deleteArticleFromBookmarks(article: ArticleUiState) {
+        updateState { it.copy(isLoading = true) }
+        tryToExecute(
+            function = { deleteArticle.invoke(article.toEntity()) },
+            onSuccess = { onDeleteArticleSuccess() },
+            onError = ::onError
+        )
+    }
+
+    private fun onDeleteArticleSuccess() {
+        updateState { it.copy(isLoading = false) }
+        sendNewIntent(HomeIntent.OnRemoveArticleFromBookmarks)
+    }
+
     private fun onError(errorState: ErrorState) {
         updateState { it.copy(isLoading = false, isError = true, error = errorState) }
     }
 
-    override fun onClickNewsItem(item: ArticleUiState) {
-        sendNewIntent(HomeIntent.OnNavigateToNewsDetails(item))
+    override fun onClickNewsItem(article: ArticleUiState) {
+        sendNewIntent(HomeIntent.OnNavigateToNewsDetails(article))
     }
 
-    override fun onClickBookMark(item: ArticleUiState) {
-        sendNewIntent(HomeIntent.OnAddNewsToBookMarks(item))
+    override fun onClickBookMark(article: ArticleUiState) {
+        if (article.isBookMarked) {
+            deleteArticleFromBookmarks(article)
+        } else {
+            saveArticleToBookMarks(article)
+        }
     }
 
     override fun getData() {

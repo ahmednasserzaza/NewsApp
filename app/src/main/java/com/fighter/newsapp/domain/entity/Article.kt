@@ -10,6 +10,7 @@ data class Article(
     val imageUrl: String,
     val publishedAt: String,
     val content: String,
+    val isBookMarked: Boolean,
 )
 
 fun Article.toArticleEntity(): ArticleEntity {
@@ -19,5 +20,6 @@ fun Article.toArticleEntity(): ArticleEntity {
         articleContent = content,
         articleDate = publishedAt,
         articleImageUrl = imageUrl,
+        isBookMarked = isBookMarked
     )
 }

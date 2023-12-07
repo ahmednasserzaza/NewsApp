@@ -13,6 +13,7 @@ import com.fighter.newsapp.ui.home.adapter.EgyptNewsAdapter
 import com.fighter.newsapp.ui.home.adapter.LatestNewsAdapter
 import com.fighter.newsapp.ui.shared.ArticleUiState
 import com.fighter.newsapp.ui.utilities.findNavControllerSafely
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -73,7 +74,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                             navigateToArticleDetails(homeIntent.article)
                         }
 
-                        is HomeIntent.OnAddNewsToBookMarks -> {}
+                        HomeIntent.OnAddArticleToBookmarks -> {
+                            Snackbar.make(
+                                binding.root,
+                                "Added Successfully",
+                                Snackbar.LENGTH_SHORT
+                            ).show()
+                        }
+
+                        HomeIntent.OnRemoveArticleFromBookmarks -> {
+                            Snackbar.make(
+                                binding.root,
+                                "Removed Successfully",
+                                Snackbar.LENGTH_SHORT
+                            ).show()
+                        }
                     }
                 }
             }

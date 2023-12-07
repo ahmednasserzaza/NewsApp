@@ -54,12 +54,12 @@ class SearchViewModel @Inject constructor(
         updateState { it.copy(isLoading = false, isError = true, error = errorState) }
     }
 
-    override fun onClickNewsItem(item: ArticleUiState) {
-        sendNewIntent(SearchIntent.OnNavigateToNewsDetails(item))
+    override fun onClickNewsItem(article: ArticleUiState) {
+        sendNewIntent(SearchIntent.OnNavigateToNewsDetails(article))
     }
 
-    override fun onClickBookMark(item: ArticleUiState) {
-        sendNewIntent(SearchIntent.OnAddNewsToBookMarks(item))
+    override fun onClickBookMark(article: ArticleUiState) {
+        sendNewIntent(SearchIntent.OnAddNewsToBookMarks(article))
     }
 
     fun setErrorUiState(combinedLoadStates: CombinedLoadStates, itemCount: Int) {

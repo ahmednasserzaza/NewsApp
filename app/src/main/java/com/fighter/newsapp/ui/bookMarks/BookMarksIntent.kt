@@ -1,6 +1,8 @@
 package com.fighter.newsapp.ui.bookMarks
 
-sealed class BookMarksIntent {
-    data class OnNavigateToNewsDetails(val id: String) : BookMarksIntent()
+import com.fighter.newsapp.ui.shared.ArticleUiState
 
+sealed class BookMarksIntent {
+    data class OnNavigateToNewsDetails(val article: ArticleUiState) : BookMarksIntent()
+    data object OnRemoveArticleSuccess : BookMarksIntent()
 }

@@ -10,6 +10,7 @@ fun ArticleDto.toEntity(): Article {
         url = url ?: "",
         imageUrl = urlToImage ?: "",
         content = content ?: "",
-        publishedAt = publishedAt ?: ""
+        publishedAt = publishedAt ?: "",
+        isBookMarked = false,
     )
 }
