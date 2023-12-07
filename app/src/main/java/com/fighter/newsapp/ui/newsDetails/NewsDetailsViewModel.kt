@@ -22,7 +22,8 @@ class NewsDetailsViewModel @Inject constructor(
             it.copy(
                 articleHeader = article.title,
                 articleContent = article.content,
-                imageUrl = article.imageUrl
+                imageUrl = article.imageUrl,
+                articleDescription = article.description
             )
         }
     }

@@ -9,4 +9,5 @@ data class NewsDetailsUiState(
     val imageUrl: String = "",
     val articleHeader: String = "",
     val articleContent: String = "",
+    val articleDescription: String = "",
 )

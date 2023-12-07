@@ -25,12 +25,23 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/news_guide_line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintGuide_percent="0.3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/image_news"
-                android:layout_width="120dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/news_guide_line"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:loadImage="@{item.imageUrl}"
@@ -39,10 +50,14 @@
             <TextView
                 android:id="@+id/text_date"
                 style="@style/DateTextStyle"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
+                android:textSize="11sp"
                 android:text="@{item.publishedAt}"
+                app:layout_constraintEnd_toStartOf="@+id/icon_bookmark"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
                 app:layout_constraintStart_toEndOf="@+id/image_news"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="24 Aug 1998" />
@@ -54,6 +69,8 @@
                 android:layout_margin="8dp"
                 android:onClick="@{() -> listener.onClickBookMark(item)}"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/text_date"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/icon_bookmark_outlined"
                 app:tint="@color/icon_tint"
@@ -68,7 +85,7 @@
                 android:text="@{item.title}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/image_news"
+                app:layout_constraintStart_toEndOf="@+id/news_guide_line"
                 tools:text="Welcome to the hill , Here is our kingdom" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
