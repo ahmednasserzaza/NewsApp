@@ -25,3 +25,5 @@ fun ArticleEntity.toEntity(): Article {
         url = ""
     )
 }
+
+fun List<ArticleEntity>.toEntity() = map { it.toEntity() }
