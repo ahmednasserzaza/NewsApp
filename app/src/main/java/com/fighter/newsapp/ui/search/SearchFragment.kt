@@ -13,10 +13,13 @@ import androidx.paging.PagingData
 import com.fighter.newsapp.R
 import com.fighter.newsapp.databinding.FragmentSearchBinding
 import com.fighter.newsapp.ui.base.BaseFragment
+import com.fighter.newsapp.ui.home.HomeFragmentDirections
 import com.fighter.newsapp.ui.search.adapter.LoadUIStateAdapter
 import com.fighter.newsapp.ui.search.adapter.SearchAdapter
+import com.fighter.newsapp.ui.shared.ArticleUiState
 import com.fighter.newsapp.ui.utilities.collect
 import com.fighter.newsapp.ui.utilities.collectLast
+import com.fighter.newsapp.ui.utilities.findNavControllerSafely
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -35,6 +38,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        bindNews()
         getSearchResultsBySearchTerm()
         collectIntents(viewModel.intent)
     }
@@ -74,24 +78,24 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         collectLast(viewModel.state.value.news) { searchAdapter.submitData(it) }
     }
 
+    private fun navigateToArticleDetails(article: ArticleUiState) {
+        val action = SearchFragmentDirections
+            .actionSearchFragmentToNewsDetailsFragment(article)
+        findNavControllerSafely(R.id.searchFragment)?.navigate(action)
+    }
+
     private fun collectIntents(intent: SharedFlow<SearchIntent>) {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                intent.collectLatest {
-                    when (it) {
-                        is SearchIntent.OnNavigateToNewsDetails -> Toast.makeText(
-                            activity?.applicationContext,
-                            it.article.title,
-                            Toast.LENGTH_SHORT
-                        ).show()
+                intent.collectLatest { searchIntent ->
+                    when (searchIntent) {
+                        is SearchIntent.OnNavigateToNewsDetails -> {
+                            navigateToArticleDetails(searchIntent.article)
+                        }
 
-                        is SearchIntent.OnAddNewsToBookMarks -> Toast.makeText(
-                            activity?.applicationContext,
-                            it.article.publishedAt,
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        is SearchIntent.OnAddNewsToBookMarks -> {}
 
-                        is SearchIntent.OnSearchNews -> TODO()
+                        is SearchIntent.OnSearchNews -> {}
                     }
                 }
             }

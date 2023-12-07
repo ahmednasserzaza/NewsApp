@@ -69,7 +69,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 intent.collectLatest { homeIntent ->
                     when (homeIntent) {
-                        is HomeIntent.OnNavigateToNewsDetails -> navigateToArticleDetails(homeIntent.article)
+                        is HomeIntent.OnNavigateToNewsDetails -> {
+                            navigateToArticleDetails(homeIntent.article)
+                        }
 
                         is HomeIntent.OnAddNewsToBookMarks -> {}
                     }

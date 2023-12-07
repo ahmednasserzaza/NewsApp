@@ -9,7 +9,6 @@ import androidx.paging.map
 import com.fighter.newsapp.domain.entity.Article
 import com.fighter.newsapp.domain.usecase.SearchNewsUseCase
 import com.fighter.newsapp.ui.base.BaseViewModel
-import com.fighter.newsapp.ui.home.HomeIntent
 import com.fighter.newsapp.ui.shared.ArticleUiState
 import com.fighter.newsapp.ui.shared.ErrorState
 import com.fighter.newsapp.ui.shared.NewsInteractionListener

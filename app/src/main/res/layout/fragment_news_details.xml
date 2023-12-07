@@ -99,6 +99,7 @@
                     android:id="@+id/text_article_content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingBottom="32dp"
                     android:text="@{viewModel.state.articleContent}"
                     tools:text="@tools:sample/lorem/random" />
             </LinearLayout>
