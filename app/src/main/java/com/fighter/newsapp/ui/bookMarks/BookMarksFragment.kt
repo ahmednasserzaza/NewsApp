@@ -9,6 +9,8 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.fighter.newsapp.R
 import com.fighter.newsapp.databinding.FragmentBookMarksBinding
 import com.fighter.newsapp.ui.base.BaseFragment
+import com.fighter.newsapp.ui.shared.ArticleUiState
+import com.fighter.newsapp.ui.utilities.findNavControllerSafely
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.SharedFlow
@@ -30,6 +32,7 @@ class BookMarksFragment : BaseFragment<FragmentBookMarksBinding>() {
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerBookmarks.adapter = bookmarksAdapter
         collectSavedArticles()
+        collectIntents(viewModel.intent)
     }
 
     private fun collectSavedArticles() {
@@ -42,13 +45,19 @@ class BookMarksFragment : BaseFragment<FragmentBookMarksBinding>() {
         }
     }
 
+    private fun navigateToArticleDetails(article: ArticleUiState) {
+        val action = BookMarksFragmentDirections
+            .actionBookMarksFragmentToNewsDetailsFragment(article)
+        findNavControllerSafely(R.id.bookMarksFragment)?.navigate(action)
+    }
+
     private fun collectIntents(intent: SharedFlow<BookMarksIntent>) {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 intent.collectLatest { bookmarkIntent ->
                     when (bookmarkIntent) {
                         is BookMarksIntent.OnNavigateToNewsDetails -> {
-
+                            navigateToArticleDetails(bookmarkIntent.article)
                         }
 
                         BookMarksIntent.OnRemoveArticleSuccess -> {

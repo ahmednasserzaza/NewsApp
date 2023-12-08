@@ -57,7 +57,7 @@ class BookMarksViewModel @Inject constructor(
     }
 
     override fun onClickNewsItem(article: ArticleUiState) {
-
+        sendNewIntent(BookMarksIntent.OnNavigateToNewsDetails(article))
     }
 
     override fun onClickBookMark(article: ArticleUiState) {
