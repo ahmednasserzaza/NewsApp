@@ -20,6 +20,7 @@ leading newspapers but also empowers users to seamlessly search for news spannin
 - Dagger Hilt dependency injection
 - Paging 2 library
 - DataBinding
+- Coil library
 - Jetpack navigation component
 
 ### Screenshots
