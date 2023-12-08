@@ -1,7 +1,7 @@
 package com.fighter.newsapp.domain.usecase
 
 import com.fighter.newsapp.data.remote.model.toEntity
-import com.fighter.newsapp.data.remote.repository.NewsRepository
+import com.fighter.newsapp.data.repository.NewsRepository
 import com.fighter.newsapp.domain.entity.Article
 import javax.inject.Inject
 
@@ -9,6 +9,16 @@ class GetLatestNewsUseCase @Inject constructor(private val newsRepository: NewsR
     suspend operator fun invoke(): List<Article> {
         return newsRepository.getLatestNews().sortedByDescending { articleDto ->
             articleDto.publishedAt
-        }.map { it.toEntity() }
+        }.map {
+            if (articleHasBookmarked(it.title!!)) {
+                it.toEntity().copy(isBookmarked = true)
+            } else {
+                it.toEntity().copy(isBookmarked = false)
+            }
+        }
+    }
+
+    private suspend fun articleHasBookmarked(title: String): Boolean {
+        return newsRepository.isArticleBookmarked(title)
     }
 }

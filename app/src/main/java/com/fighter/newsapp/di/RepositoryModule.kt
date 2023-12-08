@@ -1,7 +1,7 @@
 package com.fighter.newsapp.di
 
-import com.fighter.newsapp.data.remote.repository.NewsRepository
-import com.fighter.newsapp.data.remote.repository.NewsRepositoryImpl
+import com.fighter.newsapp.data.repository.NewsRepository
+import com.fighter.newsapp.data.repository.NewsRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

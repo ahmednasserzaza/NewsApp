@@ -9,7 +9,7 @@ data class ArticleDto(
     @SerializedName("description") val description: String? = null,
     @SerializedName("url") val url: String? = null,
     @SerializedName("urlToImage") val urlToImage: String? = null,
-    @SerializedName("publishedAt") val publishedAt: String? = null,
+    @SerializedName("publishedAt") val publishedAt: String,
     @SerializedName("content") val content: String? = null,
 ) {
     data class SourceDto(

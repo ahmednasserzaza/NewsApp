@@ -1,8 +1,10 @@
 package com.fighter.newsapp.ui.utilities
 
 import android.annotation.SuppressLint
+import android.content.res.ColorStateList
 import android.view.View
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import coil.load
@@ -51,7 +53,8 @@ fun handleNoResultPlaceholderVisibility(
     itemsCount: Int,
 ) {
     if ((!isLoading && itemsCount < 1 && query.isEmpty() && !hasError)
-        || (!isLoading && itemsCount < 1 && query.isNotEmpty() && !hasError)) {
+        || (!isLoading && itemsCount < 1 && query.isNotEmpty() && !hasError)
+    ) {
         view.visibility = View.VISIBLE
     } else {
         view.visibility = View.GONE
@@ -71,4 +74,23 @@ fun setErrorTextBasedOnError(view: TextView, errorState: ErrorState) {
         ErrorState.UnAuthorized -> "token is unauthorized"
     }
     view.text = textError
+}
+
+
+@BindingAdapter("app:bookmarkIcon")
+fun bookmarkIcon(view: ShapeableImageView, isBookMarked: Boolean) {
+    val iconResourceId = if (isBookMarked) {
+        R.drawable.icon_bookmark_filled
+    } else {
+        R.drawable.icon_bookmark_outlined
+    }
+
+    val iconTint = if (isBookMarked) {
+        ContextCompat.getColor(view.context, R.color.icon_tint)
+    } else {
+        ContextCompat.getColor(view.context, R.color.icon_tint)
+    }
+
+    view.setImageResource(iconResourceId)
+    view.setColorFilter(iconTint)
 }

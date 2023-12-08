@@ -11,4 +11,5 @@ data class ArticleUiState(
     val imageUrl: String = "",
     val publishedAt: String = "",
     val content: String = "",
-): Parcelable
+    val isBookMarked: Boolean = false,
+) : Parcelable

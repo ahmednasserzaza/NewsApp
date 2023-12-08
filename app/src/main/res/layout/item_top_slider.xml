@@ -54,9 +54,8 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/icon_bookmark_outlined"
+                app:bookmarkIcon="@{item.isBookMarked}"
                 android:onClick="@{() -> listener.onClickBookMark(item)}"
-                app:tint="@color/white_70"
                 tools:src="@drawable/icon_bookmark_outlined" />
 
             <TextView

@@ -1,7 +1,5 @@
 package com.fighter.newsapp.ui.utilities
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
@@ -13,10 +11,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Instant
+import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toInstant
 import kotlinx.datetime.toLocalDateTime
-import java.time.format.TextStyle
-import java.util.Locale
 
 fun <T> LifecycleOwner.collectLast(flow: Flow<T>, action: suspend (T) -> Unit) {
     lifecycleScope.launch {
@@ -44,15 +42,16 @@ fun Fragment.findNavControllerSafely(id: Int): NavController? {
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
-fun String.formatDateString(): String {
-    val instant: Instant = Instant.parse(this)
-    val localDateTime = instant.toLocalDateTime(TimeZone.currentSystemDefault())
+fun formatCreationDate(apiDateString: String): String {
+    val apiDateInstant = Instant.parse(apiDateString)
+    return apiDateInstant.toLocalDateTime(TimeZone.UTC).run {
+        "${dayOfWeek.name.lowercase()}, ${month.name.lowercase()} $dayOfMonth, $year"
+    }
+}
 
-    val dayOfWeek = localDateTime.dayOfWeek.getDisplayName(TextStyle.FULL, Locale.ENGLISH)
-    val month = localDateTime.month.getDisplayName(TextStyle.FULL, Locale.ENGLISH)
-    val dayOfMonth = localDateTime.dayOfMonth
-    val year = localDateTime.year
-
-    return "$dayOfWeek, $month $dayOfMonth, $year"
+fun formatCreationDate(date: LocalDateTime): String {
+    val apiDateInstant = date.toInstant(TimeZone.UTC)
+    return apiDateInstant.toLocalDateTime(TimeZone.UTC).run {
+        "${dayOfWeek.name.lowercase()}, ${month.name.lowercase()} $dayOfMonth, $year"
+    }
 }
