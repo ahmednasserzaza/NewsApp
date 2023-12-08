@@ -27,7 +27,6 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.launch
 
-@RequiresApi(Build.VERSION_CODES.O)
 @AndroidEntryPoint
 class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     override val layoutIdFragment: Int = R.layout.fragment_search

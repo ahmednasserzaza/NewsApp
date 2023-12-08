@@ -1,7 +1,9 @@
 package com.fighter.newsapp.data.remote.model
 
+import android.annotation.SuppressLint
 import com.fighter.newsapp.domain.entity.Article
 
+@SuppressLint("NewApi")
 fun ArticleDto.toEntity(): Article {
     return Article(
         author = author ?: "",
@@ -10,7 +12,7 @@ fun ArticleDto.toEntity(): Article {
         url = url ?: "",
         imageUrl = urlToImage ?: "",
         content = content ?: "",
-        publishedAt = publishedAt ?: "",
+        publishedAt = publishedAt,
         isBookmarked = false
     )
 }

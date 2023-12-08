@@ -1,12 +1,9 @@
 package com.fighter.newsapp.ui.home
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.viewModelScope
 import com.fighter.newsapp.domain.entity.Article
 import com.fighter.newsapp.domain.usecase.DeleteArticleUseCase
 import com.fighter.newsapp.domain.usecase.DoesArticleBookmarkedUseCase
-import com.fighter.newsapp.domain.usecase.GetArticlesUseCase
 import com.fighter.newsapp.domain.usecase.GetEgyptNewsUseCase
 import com.fighter.newsapp.domain.usecase.GetLatestNewsUseCase
 import com.fighter.newsapp.domain.usecase.SaveArticleUseCase
@@ -20,7 +17,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@RequiresApi(Build.VERSION_CODES.O)
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getEgyptNews: GetEgyptNewsUseCase,

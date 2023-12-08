@@ -12,9 +12,6 @@ interface ArticleDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertArticle(article: ArticleEntity)
 
-//    @Delete
-//    suspend fun deleteArticle(article: ArticleEntity)
-
     @Query("DELETE FROM Article_TABLE WHERE articleHeader = :title")
     suspend fun deleteArticle(title: String)
 

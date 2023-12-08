@@ -88,7 +88,7 @@ fun bookmarkIcon(view: ShapeableImageView, isBookMarked: Boolean) {
     val iconTint = if (isBookMarked) {
         ContextCompat.getColor(view.context, R.color.icon_tint)
     } else {
-        ContextCompat.getColor(view.context, R.color.white_87)
+        ContextCompat.getColor(view.context, R.color.icon_tint)
     }
 
     view.setImageResource(iconResourceId)

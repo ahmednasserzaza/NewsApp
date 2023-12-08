@@ -1,7 +1,5 @@
 package com.fighter.newsapp.ui.search
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.viewModelScope
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
@@ -24,7 +22,6 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@RequiresApi(Build.VERSION_CODES.O)
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     private val searchNews: SearchNewsUseCase,

@@ -39,10 +39,6 @@ class NewsRepositoryImpl @Inject constructor(
         return articleDao.insertArticle(article)
     }
 
-//    override suspend fun deleteArticle(article: ArticleEntity) {
-//        return articleDao.deleteArticle(article)
-//    }
-
     override suspend fun deleteArticle(title: String) {
         return articleDao.deleteArticle(title)
     }

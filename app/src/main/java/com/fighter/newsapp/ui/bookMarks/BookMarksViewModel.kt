@@ -1,7 +1,5 @@
 package com.fighter.newsapp.ui.bookMarks
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import com.fighter.newsapp.domain.entity.Article
 import com.fighter.newsapp.domain.usecase.DeleteArticleUseCase
 import com.fighter.newsapp.domain.usecase.GetArticlesUseCase
@@ -14,7 +12,6 @@ import com.fighter.newsapp.ui.shared.toUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
-@RequiresApi(Build.VERSION_CODES.O)
 @HiltViewModel
 class BookMarksViewModel @Inject constructor(
     private val deleteArticle: DeleteArticleUseCase,
