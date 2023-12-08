@@ -3,7 +3,6 @@ package com.fighter.newsapp.ui.search
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -13,13 +12,13 @@ import androidx.paging.PagingData
 import com.fighter.newsapp.R
 import com.fighter.newsapp.databinding.FragmentSearchBinding
 import com.fighter.newsapp.ui.base.BaseFragment
-import com.fighter.newsapp.ui.home.HomeFragmentDirections
 import com.fighter.newsapp.ui.search.adapter.LoadUIStateAdapter
 import com.fighter.newsapp.ui.search.adapter.SearchAdapter
 import com.fighter.newsapp.ui.shared.ArticleUiState
 import com.fighter.newsapp.ui.utilities.collect
 import com.fighter.newsapp.ui.utilities.collectLast
 import com.fighter.newsapp.ui.utilities.findNavControllerSafely
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -28,7 +27,6 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.launch
 
-@RequiresApi(Build.VERSION_CODES.O)
 @AndroidEntryPoint
 class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     override val layoutIdFragment: Int = R.layout.fragment_search
@@ -96,6 +94,22 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                         is SearchIntent.OnAddNewsToBookMarks -> {}
 
                         is SearchIntent.OnSearchNews -> {}
+
+                        SearchIntent.OnAddArticleToBookmarks -> {
+                            Snackbar.make(
+                                binding.root,
+                                "Added Successfully",
+                                Snackbar.LENGTH_SHORT
+                            ).show()
+                        }
+
+                        SearchIntent.OnRemoveArticleFromBookmarks -> {
+                            Snackbar.make(
+                                binding.root,
+                                "Removed Successfully",
+                                Snackbar.LENGTH_SHORT
+                            ).show()
+                        }
                     }
                 }
             }

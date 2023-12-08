@@ -1,11 +1,11 @@
-package com.fighter.newsapp.ui.newsDetails
+package com.fighter.newsapp.ui.bookMarks
 
 import com.fighter.newsapp.ui.shared.ArticleUiState
 import com.fighter.newsapp.ui.shared.ErrorState
 
-data class NewsDetailsUiState(
+data class BookMarkUiState(
     val isLoading: Boolean = false,
     val error: ErrorState = ErrorState.NotFound,
     val isError: Boolean = false,
-    val article: ArticleUiState = ArticleUiState(),
+    val articles: List<ArticleUiState> = emptyList(),
 )

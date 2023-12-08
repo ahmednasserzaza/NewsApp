@@ -7,10 +7,12 @@ import com.fighter.newsapp.ui.shared.ErrorState
 import com.fighter.newsapp.ui.shared.handelApplicationExceptions
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -30,6 +32,19 @@ abstract class BaseViewModel<S, I>(initialState: S) : ViewModel() {
         return runWithErrorCheck(onError) {
             val result = function()
             onSuccess(result)
+        }
+    }
+
+    protected fun <T> tryToCollect(
+        function: suspend () -> Flow<T>,
+        onSuccess: (T) -> Unit,
+        onError: (ErrorState) -> Unit,
+    ): Job {
+        return runWithErrorCheck(onError) {
+            val result = function()
+            result.collectLatest {
+                onSuccess(it)
+            }
         }
     }
 
