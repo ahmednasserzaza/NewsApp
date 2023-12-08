@@ -42,3 +42,7 @@ leading newspapers but also empowers users to seamlessly search for news spannin
   <img src="https://github.com/ahmednasserzaza/NewsApp/assets/30028905/4c5934fe-676e-47fa-9060-d9b387a23700" alt="Screenshot_2023-12-08-08-03-30-09_eefef3baf99a2134944732b44733d61e" width="25%">
   <img src="https://github.com/ahmednasserzaza/NewsApp/assets/30028905/ec3f346c-94d2-4f05-9a35-61384ed4e6c6" alt="bookmarks_dark" width="25%">
 </div>
+
+### Paging demo
+
+https://github.com/ahmednasserzaza/NewsApp/assets/30028905/a89f5d0a-74ea-45df-b1d4-29c53af71d7d
