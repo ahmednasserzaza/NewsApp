@@ -61,9 +61,7 @@ class BookMarksViewModel @Inject constructor(
     }
 
     override fun onClickBookMark(article: ArticleUiState) {
-        if (article.isBookMarked) {
-            deleteArticle(article)
-        }
+        deleteArticle(article)
     }
 
     override fun getData() {

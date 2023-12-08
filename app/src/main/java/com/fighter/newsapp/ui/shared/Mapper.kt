@@ -13,15 +13,15 @@ fun Article.toUiState(): ArticleUiState {
         url = url,
         imageUrl = imageUrl,
         content = content,
-        publishedAt = publishedAt.formatDateString(),
-        isBookMarked = isBookMarked
+//        publishedAt = publishedAt.formatDateString(),
+        publishedAt = publishedAt,
+        isBookMarked = isBookmarked
     )
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
 fun List<Article>.toUiState() = map { it.toUiState() }
 
-@RequiresApi(Build.VERSION_CODES.O)
 fun ArticleUiState.toEntity(): Article {
     return Article(
         author = "",
@@ -30,7 +30,7 @@ fun ArticleUiState.toEntity(): Article {
         url = url,
         imageUrl = imageUrl,
         content = content,
-        publishedAt = publishedAt.formatDateString(),
-        isBookMarked = isBookMarked
+        publishedAt = publishedAt,
+        isBookmarked = isBookMarked
     )
 }

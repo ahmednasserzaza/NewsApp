@@ -12,7 +12,7 @@ data class ArticleEntity(
     val articleContent: String,
     val articleImageUrl: String,
     val articleDate: String,
-    val isBookMarked: Boolean,
+    val isBookmarked: Boolean,
 )
 
 fun ArticleEntity.toEntity(): Article {
@@ -24,7 +24,7 @@ fun ArticleEntity.toEntity(): Article {
         publishedAt = articleDate,
         imageUrl = articleImageUrl,
         url = "",
-        isBookMarked = isBookMarked
+        isBookmarked = isBookmarked
     )
 }
 

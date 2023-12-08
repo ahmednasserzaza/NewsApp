@@ -9,6 +9,16 @@ class GetLatestNewsUseCase @Inject constructor(private val newsRepository: NewsR
     suspend operator fun invoke(): List<Article> {
         return newsRepository.getLatestNews().sortedByDescending { articleDto ->
             articleDto.publishedAt
-        }.map { it.toEntity() }
+        }.map {
+            if (articleHasBookmarked(it.title!!)) {
+                it.toEntity().copy(isBookmarked = true)
+            } else {
+                it.toEntity().copy(isBookmarked = false)
+            }
+        }
+    }
+
+    private suspend fun articleHasBookmarked(title: String): Boolean {
+        return newsRepository.isArticleBookmarked(title)
     }
 }

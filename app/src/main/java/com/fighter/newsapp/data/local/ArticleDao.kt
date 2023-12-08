@@ -12,9 +12,15 @@ interface ArticleDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertArticle(article: ArticleEntity)
 
-    @Delete
-    suspend fun deleteArticle(article: ArticleEntity)
+//    @Delete
+//    suspend fun deleteArticle(article: ArticleEntity)
+
+    @Query("DELETE FROM Article_TABLE WHERE articleHeader = :title")
+    suspend fun deleteArticle(title: String)
 
     @Query("SELECT * FROM Article_TABLE")
-    suspend fun getAllArticles(): Flow<List<ArticleEntity>>
+    fun getAllArticles(): Flow<List<ArticleEntity>>
+
+    @Query("SELECT COUNT(*) FROM Article_TABLE WHERE articleHeader = :title")
+    suspend fun doesArticleBookmarked(title: String): Boolean
 }

@@ -15,7 +15,9 @@ interface NewsRepository {
 
     suspend fun saveArticle(article: ArticleEntity)
 
-    suspend fun deleteArticle(article: ArticleEntity)
+    suspend fun deleteArticle(title:String)
 
     suspend fun getAllArticles(): Flow<List<ArticleEntity>>
+
+    suspend fun isArticleBookmarked(title:String):Boolean
 }

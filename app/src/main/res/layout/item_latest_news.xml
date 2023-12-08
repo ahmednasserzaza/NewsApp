@@ -67,13 +67,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
+                app:bookmarkIcon="@{item.isBookMarked}"
                 android:onClick="@{() -> listener.onClickBookMark(item)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/text_date"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/icon_bookmark_outlined"
-                app:tint="@color/icon_tint"
                 tools:src="@drawable/icon_bookmark_outlined" />
 
             <TextView

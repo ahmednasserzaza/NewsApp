@@ -11,6 +11,6 @@ fun ArticleDto.toEntity(): Article {
         imageUrl = urlToImage ?: "",
         content = content ?: "",
         publishedAt = publishedAt ?: "",
-        isBookMarked = false,
+        isBookmarked = false
     )
 }
