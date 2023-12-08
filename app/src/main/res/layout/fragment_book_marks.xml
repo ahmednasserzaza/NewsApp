@@ -28,5 +28,35 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/item_latest_news" />
 
+        <LinearLayout
+            android:id="@+id/not_found_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:hideIfTrue="@{!viewModel.state.articles.empty}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/no_result_placeholder"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/nothing" />
+
+            <TextView
+                style="@style/ArticleDescriptionStyle"
+                android:id="@+id/text_placeholder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/there_is_no_bookmarks_here"
+                android:textSize="12sp" />
+        </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
