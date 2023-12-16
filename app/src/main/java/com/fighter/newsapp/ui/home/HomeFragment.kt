@@ -74,21 +74,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                             navigateToArticleDetails(homeIntent.article)
                         }
 
-                        HomeIntent.OnAddArticleToBookmarks -> {
-                            Snackbar.make(
-                                binding.root,
-                                "Added Successfully",
-                                Snackbar.LENGTH_SHORT
-                            ).show()
-                        }
-
-                        HomeIntent.OnRemoveArticleFromBookmarks -> {
-                            Snackbar.make(
-                                binding.root,
-                                "Removed Successfully",
-                                Snackbar.LENGTH_SHORT
-                            ).show()
-                        }
+//                        HomeIntent.OnAddArticleToBookmarks -> {
+//                            Snackbar.make(
+//                                binding.root,
+//                                "Added Successfully",
+//                                Snackbar.LENGTH_SHORT
+//                            ).show()
+//                        }
+//
+//                        HomeIntent.OnRemoveArticleFromBookmarks -> {
+//                            Snackbar.make(
+//                                binding.root,
+//                                "Removed Successfully",
+//                                Snackbar.LENGTH_SHORT
+//                            ).show()
+//                        }
                     }
                 }
             }

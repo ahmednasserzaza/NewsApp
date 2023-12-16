@@ -7,12 +7,14 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class GetEgyptNewsUseCase @Inject constructor(private val newsRepository: NewsRepository) {
+class GetBookmarkedArticlesUseCase @Inject constructor(private val newsRepository: NewsRepository) {
     suspend operator fun invoke(): Flow<List<Article>> {
-        return newsRepository.getEgyptNews().map {
-            it.sortedByDescending { articleEntity ->
-                articleEntity.articleDate
-            }.toEntity()
+        return newsRepository.getBookmarkedArticles().map {
+            it.filter { articleEntity -> articleEntity.isBookmarked }
+                .sortedByDescending { articleEntity ->
+                    articleEntity.articleDate
+                }.toEntity()
         }
     }
+
 }

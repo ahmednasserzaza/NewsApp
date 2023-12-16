@@ -91,25 +91,25 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                             navigateToArticleDetails(searchIntent.article)
                         }
 
-                        is SearchIntent.OnAddNewsToBookMarks -> {}
-
-                        is SearchIntent.OnSearchNews -> {}
-
-                        SearchIntent.OnAddArticleToBookmarks -> {
-                            Snackbar.make(
-                                binding.root,
-                                "Added Successfully",
-                                Snackbar.LENGTH_SHORT
-                            ).show()
-                        }
-
-                        SearchIntent.OnRemoveArticleFromBookmarks -> {
-                            Snackbar.make(
-                                binding.root,
-                                "Removed Successfully",
-                                Snackbar.LENGTH_SHORT
-                            ).show()
-                        }
+//                        is SearchIntent.OnAddNewsToBookMarks -> {}
+//
+//                        is SearchIntent.OnSearchNews -> {}
+//
+//                        SearchIntent.OnAddArticleToBookmarks -> {
+//                            Snackbar.make(
+//                                binding.root,
+//                                "Added Successfully",
+//                                Snackbar.LENGTH_SHORT
+//                            ).show()
+//                        }
+//
+//                        SearchIntent.OnRemoveArticleFromBookmarks -> {
+//                            Snackbar.make(
+//                                binding.root,
+//                                "Removed Successfully",
+//                                Snackbar.LENGTH_SHORT
+//                            ).show()
+//                        }
                     }
                 }
             }

@@ -6,9 +6,7 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.map
 import com.fighter.newsapp.domain.entity.Article
-import com.fighter.newsapp.domain.usecase.DeleteArticleUseCase
-import com.fighter.newsapp.domain.usecase.DoesArticleBookmarkedUseCase
-import com.fighter.newsapp.domain.usecase.SaveArticleUseCase
+import com.fighter.newsapp.domain.usecase.UpdateArticleBookmarkStatusUseCase
 import com.fighter.newsapp.domain.usecase.SearchNewsUseCase
 import com.fighter.newsapp.ui.base.BaseViewModel
 import com.fighter.newsapp.ui.shared.ArticleUiState
@@ -25,9 +23,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     private val searchNews: SearchNewsUseCase,
-    private val deleteArticle: DeleteArticleUseCase,
-    private val saveArticle: SaveArticleUseCase,
-    private val isArticleBookmarked: DoesArticleBookmarkedUseCase,
+    private val updateArticle: UpdateArticleBookmarkStatusUseCase,
 ) : BaseViewModel<SearchUiState, SearchIntent>(SearchUiState()), NewsInteractionListener {
 
     fun onQueryTextChanged(searchTerm: CharSequence) {
@@ -56,29 +52,18 @@ class SearchViewModel @Inject constructor(
         }
     }
 
-    private fun saveArticleToBookMarks(article: ArticleUiState) {
+    private fun updateBookmarkStatus(article: ArticleUiState) {
         tryToExecute(
-            function = { saveArticle.invoke(article.toEntity()) },
-            onSuccess = { onSaveArticleToBookmarksSuccess() },
+            function = { updateArticle.invoke(article.toEntity()) },
+            onSuccess = { onUpdateBookmarkStatusSuccess() },
             onError = ::onError
         )
     }
 
-    private fun onSaveArticleToBookmarksSuccess() {
-        sendNewIntent(SearchIntent.OnAddArticleToBookmarks)
+    private fun onUpdateBookmarkStatusSuccess() {
+//        sendNewIntent(HomeIntent.OnAddArticleToBookmarks)
     }
 
-    private fun deleteArticleFromBookmarks(article: ArticleUiState) {
-        tryToExecute(
-            function = { deleteArticle.invoke(article.toEntity()) },
-            onSuccess = { onDeleteArticleSuccess() },
-            onError = ::onError
-        )
-    }
-
-    private fun onDeleteArticleSuccess() {
-        sendNewIntent(SearchIntent.OnRemoveArticleFromBookmarks)
-    }
 
     private fun onError(errorState: ErrorState) {
         updateState { it.copy(isLoading = false, isError = true, error = errorState) }
@@ -89,16 +74,7 @@ class SearchViewModel @Inject constructor(
     }
 
     override fun onClickBookMark(article: ArticleUiState) {
-        viewModelScope.launch {
-            val isBookmarked = isArticleBookmarked.invoke(article.title)
-            if (isBookmarked) {
-                deleteArticleFromBookmarks(article)
-//                updateArticleBookmark(article, false)
-            } else {
-                saveArticleToBookMarks(article)
-//                updateArticleBookmark(article, true)
-            }
-        }
+        updateBookmarkStatus(article)
     }
 
     fun setErrorUiState(combinedLoadStates: CombinedLoadStates, itemCount: Int) {

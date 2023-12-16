@@ -30,22 +30,23 @@ class NewsDetailsFragment : BaseFragment<FragmentNewsDetailsBinding>() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 intent.collectLatest { intent ->
                     when (intent) {
-                        NewsDetailsIntent.OnAddArticleToBookmarks -> {
-                            Snackbar.make(
-                                binding.root,
-                                "Added Successfully",
-                                Snackbar.LENGTH_SHORT
-                            ).show()
-                        }
+//                        NewsDetailsIntent.OnAddArticleToBookmarks -> {
+//                            Snackbar.make(
+//                                binding.root,
+//                                "Added Successfully",
+//                                Snackbar.LENGTH_SHORT
+//                            ).show()
+//                        }
+//
+//                        NewsDetailsIntent.OnRemoveArticleFromBookmarks -> {
+//                            Snackbar.make(
+//                                binding.root,
+//                                "Removed Successfully",
+//                                Snackbar.LENGTH_SHORT
+//                            ).show()
+//                        }
 
-                        NewsDetailsIntent.OnRemoveArticleFromBookmarks -> {
-                            Snackbar.make(
-                                binding.root,
-                                "Removed Successfully",
-                                Snackbar.LENGTH_SHORT
-                            ).show()
-                        }
-
+                        else -> {}
                     }
                 }
             }

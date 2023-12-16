@@ -7,17 +7,14 @@ import kotlinx.coroutines.flow.Flow
 
 interface NewsRepository {
 
-    suspend fun getEgyptNews(): List<ArticleDto>
+    suspend fun getEgyptNews(): Flow<List<ArticleEntity>>
 
-    suspend fun getLatestNews(): List<ArticleDto>
+    suspend fun getLatestNews(): Flow<List<ArticleEntity>>
 
-    suspend fun searchForNews(query: String): Pager<Int, ArticleDto>
+    suspend fun searchForNews(query: String): Pager<Int, ArticleEntity>
 
-    suspend fun saveArticle(article: ArticleEntity)
+    suspend fun updateBookmarkArticle(id: Long)
 
-    suspend fun deleteArticle(title:String)
+    suspend fun getBookmarkedArticles(): Flow<List<ArticleEntity>>
 
-    suspend fun getAllArticles(): Flow<List<ArticleEntity>>
-
-    suspend fun isArticleBookmarked(title:String):Boolean
 }
