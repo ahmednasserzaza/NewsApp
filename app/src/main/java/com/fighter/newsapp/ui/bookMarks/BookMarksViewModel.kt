@@ -44,7 +44,6 @@ class BookMarksViewModel @Inject constructor(
     }
 
     private fun onUpdateBookmarkStatusSuccess() {
-//        sendNewIntent(HomeIntent.OnAddArticleToBookmarks)
     }
 
     private fun onError(errorState: ErrorState) {

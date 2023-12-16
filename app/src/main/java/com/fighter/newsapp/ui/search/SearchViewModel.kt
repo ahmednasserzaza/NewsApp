@@ -61,7 +61,6 @@ class SearchViewModel @Inject constructor(
     }
 
     private fun onUpdateBookmarkStatusSuccess() {
-//        sendNewIntent(HomeIntent.OnAddArticleToBookmarks)
     }
 
 

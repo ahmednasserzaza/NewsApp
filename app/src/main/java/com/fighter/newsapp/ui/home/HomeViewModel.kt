@@ -72,7 +72,6 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun onUpdateBookmarkStatusSuccess() {
-//        sendNewIntent(HomeIntent.OnAddArticleToBookmarks)
     }
 
 

@@ -36,7 +36,6 @@ class NewsDetailsViewModel @Inject constructor(
 
     private fun onUpdateBookmarkStatusSuccess() {
         updateState { it.copy(article = it.article.copy(isBookMarked = !state.value.article.isBookMarked)) }
-//        sendNewIntent(HomeIntent.OnAddArticleToBookmarks)
     }
 
     private fun onError(errorState: ErrorState) {
