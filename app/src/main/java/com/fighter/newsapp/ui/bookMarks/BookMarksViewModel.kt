@@ -1,8 +1,8 @@
 package com.fighter.newsapp.ui.bookMarks
 
 import com.fighter.newsapp.domain.entity.Article
-import com.fighter.newsapp.domain.usecase.DeleteArticleUseCase
-import com.fighter.newsapp.domain.usecase.GetArticlesUseCase
+import com.fighter.newsapp.domain.usecase.GetBookmarkedArticlesUseCase
+import com.fighter.newsapp.domain.usecase.UpdateArticleBookmarkStatusUseCase
 import com.fighter.newsapp.ui.base.BaseViewModel
 import com.fighter.newsapp.ui.shared.ArticleUiState
 import com.fighter.newsapp.ui.shared.ErrorState
@@ -14,8 +14,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BookMarksViewModel @Inject constructor(
-    private val deleteArticle: DeleteArticleUseCase,
-    private val getArticles: GetArticlesUseCase,
+    private val updateArticle: UpdateArticleBookmarkStatusUseCase,
+    private val getBookmarkedArticles: GetBookmarkedArticlesUseCase,
 ) : BaseViewModel<BookMarkUiState, BookMarksIntent>(BookMarkUiState()), NewsInteractionListener {
 
     init {
@@ -25,7 +25,7 @@ class BookMarksViewModel @Inject constructor(
     private fun getAllArticles() {
         updateState { it.copy(isLoading = true) }
         tryToCollect(
-            function = getArticles::invoke,
+            function = getBookmarkedArticles::invoke,
             onSuccess = ::onGetArticlesSuccess,
             onError = ::onError
         )
@@ -35,18 +35,15 @@ class BookMarksViewModel @Inject constructor(
         updateState { it.copy(isLoading = false, articles = articles.toUiState()) }
     }
 
-    private fun deleteArticle(article: ArticleUiState) {
-        updateState { it.copy(isLoading = true) }
+    private fun updateBookmarkStatus(article: ArticleUiState) {
         tryToExecute(
-            function = { deleteArticle.invoke(article.toEntity()) },
-            onSuccess = { onDeleteArticleSuccess() },
+            function = { updateArticle.invoke(article.toEntity()) },
+            onSuccess = { onUpdateBookmarkStatusSuccess() },
             onError = ::onError
         )
     }
 
-    private fun onDeleteArticleSuccess() {
-        updateState { it.copy(isLoading = false) }
-        sendNewIntent(BookMarksIntent.OnRemoveArticleSuccess)
+    private fun onUpdateBookmarkStatusSuccess() {
     }
 
     private fun onError(errorState: ErrorState) {
@@ -58,11 +55,10 @@ class BookMarksViewModel @Inject constructor(
     }
 
     override fun onClickBookMark(article: ArticleUiState) {
-        deleteArticle(article)
+        updateBookmarkStatus(article)
     }
 
     override fun getData() {
         getAllArticles()
     }
-
 }

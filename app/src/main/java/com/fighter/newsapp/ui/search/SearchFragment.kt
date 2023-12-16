@@ -90,26 +90,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                         is SearchIntent.OnNavigateToNewsDetails -> {
                             navigateToArticleDetails(searchIntent.article)
                         }
-
-                        is SearchIntent.OnAddNewsToBookMarks -> {}
-
-                        is SearchIntent.OnSearchNews -> {}
-
-                        SearchIntent.OnAddArticleToBookmarks -> {
-                            Snackbar.make(
-                                binding.root,
-                                "Added Successfully",
-                                Snackbar.LENGTH_SHORT
-                            ).show()
-                        }
-
-                        SearchIntent.OnRemoveArticleFromBookmarks -> {
-                            Snackbar.make(
-                                binding.root,
-                                "Removed Successfully",
-                                Snackbar.LENGTH_SHORT
-                            ).show()
-                        }
                     }
                 }
             }

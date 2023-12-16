@@ -1,8 +1,7 @@
 package com.fighter.newsapp.ui.newsDetails
 
 import androidx.lifecycle.SavedStateHandle
-import com.fighter.newsapp.domain.usecase.DeleteArticleUseCase
-import com.fighter.newsapp.domain.usecase.SaveArticleUseCase
+import com.fighter.newsapp.domain.usecase.UpdateArticleBookmarkStatusUseCase
 import com.fighter.newsapp.ui.base.BaseViewModel
 import com.fighter.newsapp.ui.shared.ArticleUiState
 import com.fighter.newsapp.ui.shared.ErrorState
@@ -13,8 +12,7 @@ import javax.inject.Inject
 @HiltViewModel
 class NewsDetailsViewModel @Inject constructor(
     state: SavedStateHandle,
-    private val deleteArticle: DeleteArticleUseCase,
-    private val saveArticle: SaveArticleUseCase,
+    private val updateArticle: UpdateArticleBookmarkStatusUseCase,
 ) : BaseViewModel<NewsDetailsUiState, NewsDetailsIntent>(NewsDetailsUiState()) {
 
     private val articleArgs = NewsDetailsFragmentArgs.fromSavedStateHandle(state)
@@ -28,42 +26,25 @@ class NewsDetailsViewModel @Inject constructor(
         updateState { it.copy(article = article) }
     }
 
-    private fun saveArticleToBookMarks(article: ArticleUiState) {
+    private fun updateBookmarkStatus(article: ArticleUiState) {
         tryToExecute(
-            function = { saveArticle.invoke(article.toEntity()) },
-            onSuccess = { onSaveArticleToBookmarksSuccess() },
+            function = { updateArticle.invoke(article.toEntity()) },
+            onSuccess = { onUpdateBookmarkStatusSuccess() },
             onError = ::onError
         )
+    }
+
+    private fun onUpdateBookmarkStatusSuccess() {
+        updateState { it.copy(article = it.article.copy(isBookMarked = !state.value.article.isBookMarked)) }
     }
 
     private fun onError(errorState: ErrorState) {
         updateState { it.copy(isLoading = false) }
     }
 
-    private fun onSaveArticleToBookmarksSuccess() {
-        sendNewIntent(NewsDetailsIntent.OnAddArticleToBookmarks)
-    }
-
-    private fun deleteArticleFromBookmarks(article: ArticleUiState) {
-        tryToExecute(
-            function = { deleteArticle.invoke(article.toEntity()) },
-            onSuccess = { onDeleteArticleSuccess() },
-            onError = ::onError
-        )
-    }
-
-    private fun onDeleteArticleSuccess() {
-        sendNewIntent(NewsDetailsIntent.OnRemoveArticleFromBookmarks)
-    }
 
     fun onClickBookmark(article: ArticleUiState) {
-        if (state.value.article.isBookMarked) {
-            deleteArticleFromBookmarks(article)
-            updateState { it.copy(article = article.copy(isBookMarked = false)) }
-        } else {
-            saveArticleToBookMarks(article)
-            updateState { it.copy(article = article.copy(isBookMarked = true)) }
-        }
+        updateBookmarkStatus(article)
     }
 
     override fun getData() {
